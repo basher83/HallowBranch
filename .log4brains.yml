@@ -1,0 +1,5 @@
+project:
+  name: HallowBranch
+  tz: America/New_York
+  adrFolder: .docs/project-management/decisions
+  packages: []
