@@ -6,11 +6,15 @@ export enum ClientType {
     SPA = 'spa'
 }
 
+// Using a type alias to simplify the client type
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type DatabaseClient = SupabaseClient<any, any, any>;
+
 export class SassClient {
-    private client: SupabaseClient<Database>;
+    private client: DatabaseClient;
     private clientType: ClientType;
 
-    constructor(client: SupabaseClient<Database>, clientType: ClientType) {
+    constructor(client: DatabaseClient, clientType: ClientType) {
         this.client = client;
         this.clientType = clientType;
 
