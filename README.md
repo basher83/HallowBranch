@@ -171,6 +171,40 @@ HallowBranch runs on modern cloud infrastructure with very reasonable costs:
 
 This is significantly more cost-effective than commercial genealogy services while giving families complete control over their data.
 
+## 🔧 Development Setup
+
+The project uses [Mise](https://mise.jdx.dev/) for development environment management. To get started:
+
+1. **Install Mise** (if not already installed):
+
+   ```bash
+   curl https://mise.jdx.dev/install.sh | sh
+   ```
+
+2. **Setup local environment**:
+
+   ```bash
+   cp .mise.local.toml.example .mise.local.toml
+   # Edit .mise.local.toml with your local Supabase credentials
+   ```
+
+3. **Install dependencies and start development**:
+   ```bash
+   mise run setup
+   mise run dev
+   ```
+
+### **Available Commands:**
+
+```bash
+mise run dev        # Start development server
+mise run build      # Build for production
+mise run lint       # Run code linting
+mise run supabase   # Start local Supabase
+mise run types      # Generate TypeScript types
+mise run clean      # Clean build artifacts
+```
+
 ## 🤝 Development Notes
 
 This is a personal project focused on family genealogy. If you're interested in contributing:
