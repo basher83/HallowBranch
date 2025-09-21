@@ -1,0 +1,23 @@
+# HallowBranch Local Environment Configuration
+# Copy this file to .mise.local.toml and customize for your local environment
+# This file is ignored by git and contains environment-specific settings
+
+# Environment-specific variables (these override .mise.toml)
+[env]
+# Development-specific settings
+NODE_ENV = "development"
+DEBUG = "true"
+SUPABASE_LOCAL = "true"
+
+# Add your local Supabase credentials here
+# These are required for local development
+SUPABASE_URL = "http://localhost:54321"
+SUPABASE_ANON_KEY = "your-local-supabase-anon-key"
+SUPABASE_SERVICE_ROLE_KEY = "your-local-supabase-service-key"
+
+# Optional: Custom development settings
+# NEXT_PUBLIC_API_URL = "http://localhost:3000"
+# OPENAI_API_KEY = "your-openai-key"  # If using AI features
+
+# Add any other local development environment variables you need
+# This file overrides settings in .mise.toml for your local environment only

@@ -1,0 +1,120 @@
+# HallowBranch Development Environment Configuration
+# https://mise.jdx.dev/
+
+# Minimum Mise version required
+min_version = "2024.9.5"
+
+[tools]
+# Node.js version for the project
+nodejs = "18"
+
+[vars]
+# Project configuration
+PROJECT_NAME = "HallowBranch"
+
+# Directory paths
+NEXTJS_DIR = "nextjs"
+
+[env]
+# Add node_modules/.bin to PATH for npm packages
+_.path = ["{{config_root}}/nextjs/node_modules/.bin"]
+
+# Performance and development settings
+NODE_OPTIONS = "--max_old_space_size=4096"
+NEXT_TELEMETRY_DISABLED = "1"
+
+[tasks.dev]
+description = "Start the development server"
+depends = ["install-deps"]
+dir = "nextjs"
+run = "npm run dev"
+
+[tasks.build]
+description = "Build the application for production"
+depends = ["install-deps"]
+dir = "nextjs"
+run = "npm run build"
+
+[tasks.lint]
+description = "Run code linting"
+dir = "nextjs"
+run = "npm run lint"
+
+[tasks.start]
+description = "Start the production server"
+depends = ["build"]
+dir = "nextjs"
+run = "npm run start"
+
+[tasks.install-deps]
+description = "Install dependencies"
+dir = "nextjs"
+run = "npm install"
+
+[tasks.setup]
+description = "Complete initial setup for new developers"
+run = """
+echo '🚀 Setting up HallowBranch development environment...'
+echo '📦 Installing dependencies...'
+cd nextjs && npm install
+echo '✅ Dependencies installed'
+echo '🗄️  Setting up Supabase...'
+npx supabase login
+npx supabase link
+npx supabase db reset
+echo '✅ Supabase setup complete'
+echo '🔧 Environment setup complete!'
+echo '🎯 Run \"mise run dev\" to start development'
+"""
+
+[tasks.supabase-start]
+description = "Start local Supabase services"
+run = "npx supabase start"
+
+[tasks.supabase-stop]
+description = "Stop local Supabase services"
+run = "npx supabase stop"
+
+[tasks.supabase-reset]
+description = "Reset local database and apply migrations"
+run = "npx supabase db reset"
+
+[tasks.supabase-status]
+description = "Show Supabase project status"
+run = "npx supabase status"
+
+[tasks.types]
+description = "Generate TypeScript types from Supabase schema"
+run = "npx supabase gen types typescript --local > nextjs/src/lib/supabase/types.ts"
+
+[tasks.clean]
+description = "Clean build artifacts and dependencies"
+dir = "nextjs"
+run = "rm -rf .next node_modules/.cache && npm install"
+
+[tasks.test]
+description = "Run tests (when implemented)"
+dir = "nextjs"
+run = "npm run test"
+
+# Project-specific aliases for convenience
+[alias]
+dev = "task dev"
+build = "task build"
+start = "task start"
+lint = "task lint"
+setup = "task setup"
+supabase = "task supabase-start"
+supabase-stop = "task supabase-stop"
+types = "task types"
+clean = "task clean"
+
+# Environment-specific variables should go in .mise.local.toml:
+# [env]
+# DEBUG = "true"          # Development only
+# SUPABASE_LOCAL = "true" # Development only
+# NODE_ENV = "development" # Development only
+#
+# [env.production]
+# NODE_ENV = "production" # Production only
+# SUPABASE_LOCAL = "false" # Production only
