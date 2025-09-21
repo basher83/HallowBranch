@@ -1,202 +1,262 @@
-# Supabase Next.js SaaS Template
+# 🌳 HallowBranch - Private Family Genealogy Platform
 
-A production-ready SaaS template built with Next.js 15, Supabase, and Tailwind CSS. This template provides everything you need to quickly launch your SaaS product, including authentication, user management, file storage, and more.
+**A privacy-first family genealogy platform that enables families to collaboratively preserve and share their heritage with complete data ownership and real-time collaboration.**
 
-## LIVE DEMO
+[![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
+[![Supabase](https://img.shields.io/badge/Supabase-1.0-green)](https://supabase.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
 
-Demo is here - https://basicsass.razikus.com
+## 🎯 Overview
 
-## Self promo
-Hey, don't be a code printer in AI era. Check my book
-```
-http://razikus.gumroad.com/l/dirtycode - live now!
-https://www.amazon.com/dp/B0FNR716CF - live from 01.09
-https://books.apple.com/us/book/dirty-code-but-works/id6751538660 - live from 01.09
-https://play.google.com/store/books/details?id=5UWBEQAAQBAJ - live from 01.09
-```
+HallowBranch is a modern, privacy-focused family genealogy platform built for families who want to maintain their family history without sharing sensitive data with commercial genealogy companies. Unlike Ancestry ($2,880+/year for 20 users) and MyHeritage ($2,500-3,780/year), HallowBranch provides complete family data ownership for ~$25-50/month hosting costs.
 
-## Deployment video
+### ✨ Key Features
 
-Video is here - https://www.youtube.com/watch?v=kzbXavLndmE
+- **🛡️ Complete Privacy** - Family-only access with no public data sharing
+- **👥 Real-time Collaboration** - Live editing with change attribution
+- **📸 Rich Media Support** - Photo and document integration with drag-and-drop
+- **🌐 Modern Web App** - Responsive design for all devices
+- **🔐 Enterprise Security** - Row-level security with family-based access controls
+- **⚡ Fast Performance** - Optimized for 20+ concurrent family members
 
-## Migration from auth schema
+## 🚀 Getting Started
 
-According to this - https://github.com/Razikus/supabase-nextjs-template/issues/4
+### Prerequisites
 
-We are no longer able to modify auth schema. I modified original migrations to rename it to custom schema. If you need to migrate from older version - check supabase/migrations_for_old/20250525183944_auth_removal.sql
+- Node.js 18+ and npm/yarn
+- Supabase account and CLI installed globally
+- Git for version control
 
-## SupaNuggets
-
-On top of this template I'm building a SupaNuggets series - 50 mini apps
-
-https://supanuggets.razikus.com - grab your copy for free :) (Pay As You Want model)
-
-## 🚀 Features
-
-- **Authentication**
-    - Email/Password authentication
-    - Multi-factor authentication (MFA) support
-    - OAuth/SSO integration ready
-    - Password reset and email verification
-
-- **User Management**
-    - User profiles and settings
-    - Secure password management
-    - Session handling
-
-- **File Management Demo (2FA ready)**
-    - Secure file upload and storage
-    - File sharing capabilities
-    - Drag-and-drop interface
-    - Progress tracking
-
-- **Task Management Demo (2FA ready)**
-    - CRUD operations example
-    - Real-time updates
-    - Filtering and sorting
-    - Row-level security
-
-- **Security**
-    - Row Level Security (RLS) policies
-    - Secure file storage policies
-    - Protected API routes
-    - MFA implementation
-
-- **UI/UX**
-    - Modern, responsive design
-    - Dark mode support
-    - Loading states
-    - Error handling
-    - Toast notifications
-    - Confetti animations
-
-- **Legal & Compliance**
-    - Privacy Policy template
-    - Terms of Service template
-    - Refund Policy template
-    - GDPR-ready cookie consent
-
-## 🛠️ Tech Stack
-
-- **Frontend**
-    - Next.js 15 (App Router)
-    - React 19
-    - Tailwind CSS
-    - shadcn/ui components
-    - Lucide icons
-
-- **Backend**
-    - Supabase
-    - PostgreSQL
-    - Row Level Security
-    - Storage Buckets
-
-- **Authentication**
-    - Supabase Auth
-    - MFA support
-    - OAuth providers
-
-## 📦 Getting Started - local dev
-
-1. Fork or clone repository
-2. Prepare Supabase Project URL (Project URL from `Project Settings` -> `API` -> `Project URL`)
-3. Prepare Supabase Anon and Service Key (`Anon Key`, `Service Key` from `Project Settings` -> `API` -> `anon public` and `service_role`)
-4. Prepare Supabase Database Password  (You can reset it inside `Project Settings` -> `Database` -> `Database Password`)
-5. If you already know your app url -> adjust supabase/config.toml `site_url` and `additional_redirect_urls`, you can do it later
-6. Run following commands (inside root of forked / downloaded repository):
+### Quick Start (3-4 days to MVP)
 
 ```bash
-# Login to supabase
+# 1. Clone and setup
+git clone <repository-url> hallowbranch
+cd hallowbranch
+
+# 2. Configure Supabase
 npx supabase login
-# Link project to supabase (require database password) - you will get selector prompt
-npx supabase link
+npx supabase link --project-ref YOUR_PROJECT_REF
+npx supabase db reset
 
-# Send config to the server - may require confirmation (y)
-npx supabase config push
+# 3. Setup environment
+cd nextjs
+cp .env.example .env.local
+# Edit .env.local with your Supabase keys
 
-# Up migrations
-npx supabase migrations up --linked
-
+# 4. Install and run
+yarn install
+yarn dev
 ```
 
-7. Go to next/js folder and run `yarn`
-8. Copy .env.template to .env.local
-9. Adjust .env.local
-```
-NEXT_PUBLIC_SUPABASE_URL=https://APIURL
-NEXT_PUBLIC_SUPABASE_ANON_KEY=ANONKEY
-PRIVATE_SUPABASE_SERVICE_KEY=SERVICEROLEKEY
+For detailed setup instructions, see [docs/project-management/IMPLEMENTATION.md](docs/project-management/IMPLEMENTATION.md).
+
+## 📋 Project Structure
 
 ```
-10. Run yarn dev
-11. Go to http://localhost:3000 🎉
+📦 HallowBranch
+├── 📂 docs/                    # Documentation
+│   └── 📂 project-management/
+│       ├── 📂 ADRs/           # Architecture Decision Records
+│       ├── 📂 PRDs/           # Product Requirements
+│       ├── IMPLEMENTATION.md  # Technical implementation guide
+│       ├── MVP-HallowBranchv1.md # MVP learning objectives
+│       └── PRD-vs-MVP-vs-ADR.md # Documentation framework
+├── 📂 nextjs/                  # Next.js application
+│   ├── 📂 src/
+│   │   ├── 📂 app/            # App router pages
+│   │   ├── 📂 components/     # UI components
+│   │   └── 📂 lib/            # Utilities and configurations
+│   └── 📂 supabase/           # Database migrations
+└── 📂 PRPs/                   # Project Research Proposals
+```
 
-## 🚀 Getting Started - deploy to vercel
+## 🏗️ Architecture & Technology Stack
 
-1. Fork or clone repository
-2. Create project in Vercel - choose your repo
-3. Paste content of .env.local into environment variables
-4. Click deploy
-5. Adjust in supabase/config.toml site_url and additional_redirect_urls (important in additional_redirect_urls is to have https://YOURURL/** - these 2 **)
-6. Done!
+### Core Technologies
 
-## 📄 Legal Documents
+- **Frontend**: Next.js 15 with React 19, TypeScript, Tailwind CSS
+- **Backend**: Supabase (PostgreSQL, Auth, Storage, Real-time)
+- **UI Components**: shadcn/ui component library
+- **Deployment**: Vercel with environment-based configuration
 
-The template includes customizable legal documents - these are in markdown, so you can adjust them as you see fit:
+### Key Architecture Decisions
 
-- Privacy Policy (`/public/terms/privacy-notice.md`)
-- Terms of Service (`/public/terms/terms-of-service.md`)
-- Refund Policy (`/public/terms/refund-policy.md`)
+Our technical decisions are documented in Architecture Decision Records (ADRs):
 
-## 🎨 Theming
+- **[Use Razikus Template as Foundation](docs/project-management/decisions/20250921-use-razikus-template-foundation.md)** - Why we chose the Razikus template
+- **[Use Supabase as Backend Platform](docs/project-management/decisions/20250921-use-supabase-backend.md)** - Backend platform selection
+- **[Use family-chart for Tree Visualization](docs/project-management/decisions/20250921-use-family-chart-visualization.md)** - Tree visualization component
 
-The template includes several pre-built themes:
-- `theme-sass` (Default)
-- `theme-blue`
-- `theme-purple`
-- `theme-green`
+### Database Schema
 
-Change the theme by updating the `NEXT_PUBLIC_THEME` environment variable.
+```sql
+-- Core entities for family genealogy
+persons (id, first_name, last_name, birth_date, death_date, biography, ...)
+relationships (id, person1_id, person2_id, relationship_type, ...)
+person_media (id, person_id, file_url, file_type, caption, ...)
+families (id, name, description, created_by, ...)
+family_members (id, family_id, user_id, role, joined_at, ...)
+```
+
+## 🎯 Development Roadmap
+
+### MVP Phase (Week 1-4)
+
+**Goal**: Validate core hypotheses about privacy needs and collaboration value
+
+- **Week 1**: Foundation setup and family member CRUD
+- **Week 2**: Photo upload integration and Google OAuth
+- **Week 3**: Real-time collaboration and basic tree view
+- **Week 4**: Testing and launch to beta families
+
+**Success Metrics**:
+
+- 50+ families sign up in first month
+- 70% of users upload at least one photo
+- 60% of families have 3+ active contributors
+
+### Enhanced Phase (Week 5-8)
+
+- Enhanced media management and galleries
+- Activity feeds and change history
+- Advanced tree visualization modes
+- GEDCOM import/export capabilities
+
+### Advanced Phase (Week 9-12)
+
+- Timeline and geographic visualization
+- Statistics dashboard
+- Print-friendly and PDF generation
+- Advanced search and filtering
+
+For detailed MVP learning objectives, see [MVP-HallowBranchv1.md](docs/project-management/MVP-HallowBranchv1.md).
+
+## 📚 Documentation
+
+### 📋 Product Documentation
+
+- **[PRD - Family Genealogy App](docs/project-management/PRDs/PRD–Family-Genealogy-App.md)** - Complete product requirements
+- **[MVP-HallowBranchv1.md](docs/project-management/MVP-HallowBranchv1.md)** - MVP learning objectives and validation
+- **[PRD-vs-MVP-vs-ADR.md](docs/project-management/PRD-vs-MVP-vs-ADR.md)** - Documentation framework guide
+
+### 🏗️ Technical Documentation
+
+- **[IMPLEMENTATION.md](docs/project-management/IMPLEMENTATION.md)** - Technical implementation guide
+- **[Architecture Decision Records](docs/project-management/decisions/)** - Technical decision rationale
+- **[ADR Index](docs/project-management/decisions/INDEX.md)** - Browse all ADRs by category
+
+### 📋 Project Research Proposals (PRPs)
+
+- **[PRPs/README.md](PRPs/README.md)** - Agentic engineering methodology
+- **[PRPs/ai_docs/](PRPs/ai_docs/)** - AI and automation documentation
+
+## 🔐 Privacy & Security
+
+HallowBranch is built with privacy as a core principle:
+
+- **Family-Only Access**: Row-level security ensures only family members can access data
+- **Complete Data Ownership**: Families maintain full control of their genealogy data
+- **No Data Sharing**: Unlike commercial platforms, no data is shared with partners
+- **GDPR Compliance**: Built-in privacy controls and data handling practices
+- **Transparent Architecture**: All technical decisions documented in ADRs
+
+## 💰 Cost Comparison
+
+| Platform         | 20 Users/Year | Privacy     | Real-time Collaboration |
+| ---------------- | ------------- | ----------- | ----------------------- |
+| **HallowBranch** | ~$300-600     | ✅ Complete | ✅ Built-in             |
+| Ancestry         | $2,880+       | ❌ Shared   | ❌ Limited              |
+| MyHeritage       | $2,500-3,780  | ❌ Shared   | ❌ Limited              |
+
+_HallowBranch hosting costs: $25-50/month for typical family usage_
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+We welcome contributions to HallowBranch! Please see our contribution guidelines:
 
+1. **Architecture Decisions**: Review existing ADRs before proposing changes
+2. **Code Quality**: Follow Next.js and React best practices
+3. **Testing**: Add tests for new features and bug fixes
+4. **Documentation**: Update relevant documentation for any changes
+5. **Privacy Focus**: Ensure all changes maintain family data privacy
 
-## Need Multitenancy, Billing (Paddle) and Role Based Access Control?
+### Development Workflow
 
-I have paid template as well available here:
+1. Create a feature branch
+2. Make changes following existing patterns
+3. Add tests for new functionality
+4. Update documentation as needed
+5. Submit pull request with clear description
 
-https://sasstemplate.razikus.com
+## 🧪 Testing & Quality Assurance
 
-Basically it's the same template but with Paddle + organisations API keys + multiple organisations + Role Based Access Control
+- **Unit Tests**: Core business logic and utilities
+- **Integration Tests**: Real-time collaboration features
+- **E2E Tests**: Critical user flows (person creation, photo upload)
+- **Family Beta Testing**: Real-world validation with family groups
+- **Performance Testing**: Load testing for family tree operations
 
-For code GITHUB you can get -50% off
+## 📱 Mobile & Responsive Design
 
-https://razikus.gumroad.com/l/supatemplate/GITHUB
+HallowBranch is built as a progressive web app with mobile-first design:
 
-## 📝 License
+- Responsive layout for phones and tablets
+- Touch-optimized interactions
+- Offline-capable features
+- Mobile-friendly tree visualization
 
-This project is licensed under the Apache License - see the LICENSE file for details.
+## 🔧 Development Commands
 
-## 💪 Support
+```bash
+# Install dependencies
+yarn install
 
-If you find this template helpful, please consider giving it a star ⭐️
+# Start development server
+yarn dev
 
-Or buy me a coffee!
+# Build for production
+yarn build
 
-- [BuyMeACoffee](https://buymeacoffee.com/razikus)
+# Run tests
+yarn test
 
-My socials:
+# Lint code
+yarn lint
 
-- [Twitter](https://twitter.com/Razikus_)
-- [GitHub](https://github.com/Razikus)
-- [Website](https://www.razikus.com)
+# Format code
+yarn format
 
+# Supabase local development
+npx supabase start
+
+# Generate types from database
+npx supabase gen types typescript --local > src/lib/supabase/types.ts
+```
+
+## 📄 License
+
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
-- [Next.js](https://nextjs.org/)
-- [Supabase](https://supabase.com/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [shadcn/ui](https://ui.shadcn.com/)
+- **[Razikus](https://github.com/Razikus)** - Supabase-NextJS template foundation
+- **[Supabase](https://supabase.com/)** - Backend platform and real-time features
+- **[Next.js](https://nextjs.org/)** - React framework
+- **[shadcn/ui](https://ui.shadcn.com/)** - UI component library
+- **[family-chart](https://github.com/donatso/family-chart)** - Tree visualization
+
+## 💪 Support the Project
+
+If you find HallowBranch helpful:
+
+- ⭐ Give it a star on GitHub
+- 🐛 Report bugs or suggest features
+- 📖 Contribute to documentation
+- 🔀 Submit pull requests
+
+**Together, we're building the future of private family genealogy!** 🌳
+
+---
+
+_Built with ❤️ for families who value privacy and collaboration_
