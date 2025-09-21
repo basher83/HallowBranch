@@ -10,7 +10,7 @@ Demo is here - https://basicsass.razikus.com
 
 Hey, don't be a code printer in AI era. Check my book
 
-```
+```text
 http://razikus.gumroad.com/l/dirtycode - live now!
 https://www.amazon.com/dp/B0FNR716CF - live from 01.09
 https://books.apple.com/us/book/dirty-code-but-works/id6751538660 - live from 01.09
