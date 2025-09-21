@@ -6,7 +6,7 @@ Based on your tech stack, here's a customized template structure:
 
 Target Market: Families who want to maintain private family trees without sharing data with commercial genealogy companies, with a focus on collaborative editing and media-rich storytelling.
 
-Core Value Proposition: Unlike public genealogy platforms (Ancestry, MyHeritage) that share your family data with partners and charge $2,880+/year for 20 users, our platform provides private, family-only access with collaborative editing for ~$25-50/month total hosting costs.
+Core Value Proposition: Unlike public genealogy platforms (Ancestry, MyHeritage) that share your family data with partners and charge $2,880+/year for 20 users, my platform provides private, family-only access with collaborative editing for ~$25-50/month total hosting costs.
 
 2. Product Objectives
    Primary: Enable families to build comprehensive digital family trees with collaborative editing and media storage
@@ -82,7 +82,7 @@ Success Metrics:
 
 ### 1. Summary
 
-Families need a private, collaborative platform to maintain their genealogy without sharing sensitive family data with commercial companies. Current solutions like Ancestry and MyHeritage are expensive ($2,880+/year for 20 users), lack real-time collaboration, and compromise privacy. We will build a privacy-first family genealogy platform using the Razikus Supabase-NextJS template that provides collaborative editing, media storage, and complete family data ownership for ~$25-50/month hosting costs.
+Families need a private, collaborative platform to maintain their genealogy without sharing sensitive family data with commercial companies. Current solutions like Ancestry and MyHeritage are expensive ($2,880+/year for 20 users), lack real-time collaboration, and compromise privacy. I will build a privacy-first family genealogy platform using the Razikus Supabase-NextJS template that provides collaborative editing, media storage, and complete family data ownership for ~$25-50/month hosting costs.
 
 ### 2. Goals and Non‑Goals
 

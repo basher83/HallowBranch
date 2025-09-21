@@ -2,7 +2,7 @@
 
 ## Overview
 
-This guide provides technical implementation details for building the HallowBranch family genealogy platform. For product requirements, business case, and user stories, see [PRD–Family-Genealogy-App.md](PRDs/PRD–Family-Genealogy-App.md). For MVP learning objectives and hypothesis validation, see [MVP-HallowBranchv1.md](MVP-HallowBranchv1.md).
+This guide provides technical implementation details for building my HallowBranch family genealogy platform. For product requirements, business case, and user stories, see [PRD–Family-Genealogy-App.md](PRDs/PRD–Family-Genealogy-App.md). For MVP learning objectives and hypothesis validation, see [MVP-HallowBranchv1.md](MVP-HallowBranchv1.md).
 
 ## Architecture Decisions
 
@@ -44,7 +44,7 @@ The project is built on the Razikus Supabase-NextJS template, providing pre-conf
 
 ### Phase 1: MVP (Days 1-7)
 
-**Goal**: Basic functional genealogy platform with core features
+**Goal**: Basic functional genealogy platform for my family with core features
 
 **Day 1-2: Setup & Initial Customization**
 

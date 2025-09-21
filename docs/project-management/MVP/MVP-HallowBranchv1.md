@@ -164,4 +164,4 @@
 3. **Will families actually use it?** (Engagement validation)
 4. **Is the privacy premium worth it?** (Value validation)
 
-**The MVP succeeds if we learn whether to build a full genealogy platform or focus on a different family collaboration solution.**
+**The MVP succeeds if I learn whether to build a full genealogy platform or focus on a different family collaboration solution.**

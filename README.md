@@ -1,6 +1,6 @@
 # 🌳 HallowBranch - Private Family Genealogy Platform
 
-**A privacy-first family genealogy platform that enables families to collaboratively preserve and share their heritage with complete data ownership and real-time collaboration.**
+**A personal family genealogy platform I built for my family to preserve our heritage with complete privacy and real-time collaboration.**
 
 [![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
 [![Supabase](https://img.shields.io/badge/Supabase-1.0-green)](https://supabase.com/)
@@ -8,7 +8,7 @@
 
 ## 🎯 Overview
 
-HallowBranch is a modern, privacy-focused family genealogy platform built for families who want to maintain their family history without sharing sensitive data with commercial genealogy companies. Unlike Ancestry ($2,880+/year for 20 users) and MyHeritage ($2,500-3,780/year), HallowBranch provides complete family data ownership for ~$25-50/month hosting costs.
+HallowBranch is a family genealogy platform I built to help families preserve their history privately. Unlike commercial genealogy services that require sharing family data with third parties, HallowBranch keeps everything within the family while providing modern collaborative features.
 
 ### ✨ Key Features
 
@@ -153,27 +153,27 @@ For detailed MVP learning objectives, see [MVP-HallowBranchv1.md](docs/project-m
 
 ## 🔐 Privacy & Security
 
-HallowBranch is built with privacy as a core principle:
+HallowBranch prioritizes family privacy from the ground up:
 
-- **Family-Only Access**: Row-level security ensures only family members can access data
-- **Complete Data Ownership**: Families maintain full control of their genealogy data
-- **No Data Sharing**: Unlike commercial platforms, no data is shared with partners
-- **GDPR Compliance**: Built-in privacy controls and data handling practices
-- **Transparent Architecture**: All technical decisions documented in ADRs
+- **Family-Only Access**: Only invited family members can view and edit the family tree
+- **Complete Data Control**: All family data stays within the family - no third-party access
+- **Secure Architecture**: Built with modern security practices and data protection
+- **Transparent Development**: Technical decisions documented for accountability
+- **Personal Ownership**: Families maintain complete control over their genealogy data
 
-## 💰 Cost Comparison
+## 💰 About Hosting Costs
 
-| Platform         | 20 Users/Year | Privacy     | Real-time Collaboration |
-| ---------------- | ------------- | ----------- | ----------------------- |
-| **HallowBranch** | ~$300-600     | ✅ Complete | ✅ Built-in             |
-| Ancestry         | $2,880+       | ❌ Shared   | ❌ Limited              |
-| MyHeritage       | $2,500-3,780  | ❌ Shared   | ❌ Limited              |
+HallowBranch runs on modern cloud infrastructure with very reasonable costs:
 
-_HallowBranch hosting costs: $25-50/month for typical family usage_
+- **Supabase**: $25/month for typical family usage (database, auth, storage)
+- **Vercel**: $0-20/month (hosting and deployment)
+- **Total**: Around $25-50/month for a family genealogy project
 
-## 🤝 Contributing
+This is significantly more cost-effective than commercial genealogy services while giving families complete control over their data.
 
-We welcome contributions to HallowBranch! Please see our contribution guidelines:
+## 🤝 Development Notes
+
+This is a personal project focused on family genealogy. If you're interested in contributing:
 
 1. **Architecture Decisions**: Review existing ADRs before proposing changes
 2. **Code Quality**: Follow Next.js and React best practices
@@ -181,13 +181,12 @@ We welcome contributions to HallowBranch! Please see our contribution guidelines
 4. **Documentation**: Update relevant documentation for any changes
 5. **Privacy Focus**: Ensure all changes maintain family data privacy
 
-### Development Workflow
+### Getting Involved
 
-1. Create a feature branch
-2. Make changes following existing patterns
-3. Add tests for new functionality
-4. Update documentation as needed
-5. Submit pull request with clear description
+- Review the existing ADRs to understand technical decisions
+- Follow the implementation guide for setup instructions
+- Test new features with family members for real-world validation
+- Document any changes or improvements
 
 ## 🧪 Testing & Quality Assurance
 
@@ -246,16 +245,16 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 - **[shadcn/ui](https://ui.shadcn.com/)** - UI component library
 - **[family-chart](https://github.com/donatso/family-chart)** - Tree visualization
 
-## 💪 Support the Project
+## 💪 About This Project
 
-If you find HallowBranch helpful:
+HallowBranch is a personal project I built to help families preserve their genealogy privately. If you're interested in family genealogy or want to learn about the technical approach:
 
-- ⭐ Give it a star on GitHub
-- 🐛 Report bugs or suggest features
-- 📖 Contribute to documentation
-- 🔀 Submit pull requests
+- ⭐ Star the project if you find it interesting
+- 🐛 Share feedback or suggestions
+- 📖 Learn from the documentation and ADRs
+- 🔀 Contribute if you want to help improve it
 
-**Together, we're building the future of private family genealogy!** 🌳
+**Built for families who value privacy and collaboration.** 🌳
 
 ---
 

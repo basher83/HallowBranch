@@ -7,7 +7,7 @@ You are free to edit it as you want
 
 **Welcome to the architectural decision log for HallowBranch** - a private, family-focused genealogy application for preserving and sharing family history across generations.
 
-This knowledge base contains all Architecture Decision Records (ADRs) that guide the technical direction and implementation choices for our genealogy platform.
+This knowledge base contains all Architecture Decision Records (ADRs) that guide the technical direction and implementation choices for my family genealogy platform.
 
 ## 📋 What You'll Find Here
 

@@ -6,7 +6,7 @@
 
 ## Context and Problem Statement
 
-We need to build a family genealogy platform with collaborative editing, media storage, and real-time features within a 3-4 day MVP timeline. We evaluated multiple foundation approaches: building from scratch, using alternative templates, or forking an existing template with overlapping features.
+I need to build a family genealogy platform for my family with collaborative editing, media storage, and real-time features within a 3-4 day MVP timeline. I evaluated multiple foundation approaches: building from scratch, using alternative templates, or forking an existing template with overlapping features.
 
 ## Considered Options
 
