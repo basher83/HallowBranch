@@ -33,18 +33,18 @@ export default function AuthAwareButtons({ variant = 'primary' }) {
         return isAuthenticated ? (
             <Link
                 href="/app"
-                className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors"
+                className="bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors"
             >
                 Go to Dashboard
             </Link>
         ) : (
             <>
-                <Link href="/auth/login" className="text-gray-600 hover:text-gray-900">
+                <Link href="/auth/login" className="text-muted-foreground hover:text-foreground">
                     Login
                 </Link>
                 <Link
                     href="/auth/register"
-                    className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors"
+                    className="bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors"
                 >
                     Get Started
                 </Link>
@@ -56,7 +56,7 @@ export default function AuthAwareButtons({ variant = 'primary' }) {
     return isAuthenticated ? (
         <Link
             href="/app"
-            className="inline-flex items-center px-6 py-3 rounded-lg bg-primary-600 text-white font-medium hover:bg-primary-700 transition-colors"
+            className="inline-flex items-center px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
         >
             Go to Dashboard
             <ArrowRight className="ml-2 h-5 w-5" />
@@ -65,14 +65,14 @@ export default function AuthAwareButtons({ variant = 'primary' }) {
         <>
             <Link
                 href="/auth/register"
-                className="inline-flex items-center px-6 py-3 rounded-lg bg-primary-600 text-white font-medium hover:bg-primary-700 transition-colors"
+                className="inline-flex items-center px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
             >
                 Start Building Free
                 <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
             <Link
                 href="#features"
-                className="inline-flex items-center px-6 py-3 rounded-lg border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition-colors"
+                className="inline-flex items-center px-6 py-3 rounded-lg border border-border text-foreground font-medium hover:bg-accent hover:text-accent-foreground transition-colors"
             >
                 Learn More
                 <ChevronRight className="ml-2 h-5 w-5" />

@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import CookieConsent from "@/components/Cookies";
 import { GoogleAnalytics } from '@next/third-parties/google'
+import { Providers } from "./providers"
 
 
 export const metadata: Metadata = {
@@ -22,16 +23,17 @@ export default function RootLayout({
   }
   const gaID = process.env.NEXT_PUBLIC_GOOGLE_TAG;
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
     <body className={theme}>
-      {children}
-      <Analytics />
-      <SpeedInsights />
-      <CookieConsent />
-      { gaID && (
-          <GoogleAnalytics gaId={gaID}/>
-      )}
-
+      <Providers>
+        {children}
+        <Analytics />
+        <SpeedInsights />
+        <CookieConsent />
+        { gaID && (
+            <GoogleAnalytics gaId={gaID}/>
+        )}
+      </Providers>
     </body>
     </html>
   );
