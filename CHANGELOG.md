@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.2.0] - 2025-01-22 - Dark Mode Implementation
+## [0.2.0] - 2025-09-22 - Dark Mode Implementation
 
 ### Added
 
@@ -101,7 +101,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Proper input validation for theme values
 - Secure cookie-based persistence for SSR support
 
-## [0.1.5] - 2025-01-21 - Documentation & Development Workflow
+## [0.1.5] - 2025-09-22 - Documentation & Development Workflow
 
 ### Added
 - Comprehensive Claude Code development commands and automation
@@ -118,7 +118,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Optimized QR code display with Next.js Image component
 - Updated Supabase auth URLs for HallowBranch production domain
 
-## [0.1.0] - 2025-01-20 - Initial Platform Release
+## [0.1.0] - 2025-09-21 - Initial Platform Release
 
 ### Initial Release
 - Basic HallowBranch family genealogy platform
@@ -139,29 +139,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Project Evolution Timeline
 
-#### Phase 1: Template Foundation (Early January 2025)
+#### Phase 1: Template Foundation (Early September 2025)
 - Initial template setup from Razikus SaaS template
 - Basic authentication and storage implementation
 - Landing page and pricing components
 
-#### Phase 2: Rebranding to HallowBranch (Mid January 2025)
+#### Phase 2: Rebranding to HallowBranch (Mid September 2025)
 - Complete transformation from generic template to family genealogy platform
 - Updated documentation and branding
 - Added comprehensive README focusing on privacy and family collaboration
 
-#### Phase 3: Development Infrastructure (January 20-21, 2025)
+#### Phase 3: Development Infrastructure (September 21-22, 2025)
 - Added development tooling (Mise, Yarn 4)
 - Integrated Claude Code and Cursor IDE workflows
 - Implemented PRP-based development methodology
 - Added comprehensive documentation structure
 
-#### Phase 4: Production Preparation (January 21, 2025)
+#### Phase 4: Production Preparation (September 22, 2025)
 - Fixed TypeScript compilation errors
 - Optimized React components with proper hooks
 - Configured production URLs and authentication
 - Added performance monitoring (Vercel Analytics)
 
-#### Phase 5: Dark Mode Implementation (January 22, 2025)
+#### Phase 5: Dark Mode Implementation (September 22, 2025)
 - Complete dark mode system with theme persistence
 - User preference management via Supabase
 - Comprehensive UI component updates
@@ -175,7 +175,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## Detailed Commit History (2025-01-22)
+## Detailed Commit History (2025-09-22)
 
 - `5cefea6` - docs(theme): add comprehensive dark mode documentation
 - `349b85a` - feat(ui): integrate dark mode UI components
