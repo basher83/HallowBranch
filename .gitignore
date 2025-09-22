@@ -202,3 +202,5 @@ temp/
 
 # Turbo
 .turbo
+
+.mcp.json
