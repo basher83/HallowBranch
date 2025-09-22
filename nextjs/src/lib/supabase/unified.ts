@@ -1,5 +1,6 @@
 import {SupabaseClient} from "@supabase/supabase-js";
 import {Database} from "@/lib/types";
+import type { ThemePreference } from "@/lib/types/theme.types";
 
 export enum ClientType {
     SERVER = 'server',
@@ -100,6 +101,109 @@ export class SassClient {
 
     getSupabaseClient() {
         return this.client;
+    }
+
+    // User preferences methods
+    async getUserPreferences(userId: string): Promise<ThemePreference | null> {
+        const { data, error } = await this.client
+            .from('user_preferences')
+            .select('*')
+            .eq('user_id', userId)
+            .single();
+
+        if (error || !data) return null;
+
+        // Transform snake_case database fields to camelCase
+        return {
+            id: data.id,
+            userId: data.user_id,
+            colorTheme: data.color_theme,
+            modeTheme: data.mode_theme,
+            enableSystemDetection: data.enable_system_detection,
+            enableTransitions: data.enable_transitions,
+            syncAcrossDevices: data.sync_across_devices,
+            createdAt: data.created_at,
+            updatedAt: data.updated_at
+        };
+    }
+
+    async updateUserPreferences(
+        userId: string,
+        preferences: Partial<Omit<ThemePreference, 'id' | 'userId' | 'createdAt' | 'updatedAt'>>
+    ) {
+        const dbData = {
+            user_id: userId,
+            color_theme: preferences.colorTheme,
+            mode_theme: preferences.modeTheme,
+            enable_system_detection: preferences.enableSystemDetection,
+            enable_transitions: preferences.enableTransitions,
+            sync_across_devices: preferences.syncAcrossDevices,
+            updated_at: new Date().toISOString()
+        };
+
+        // Filter out undefined values
+        const filteredData = Object.fromEntries(
+            Object.entries(dbData).filter(([, v]) => v !== undefined)
+        );
+
+        const { data, error } = await this.client
+            .from('user_preferences')
+            .upsert(filteredData, {
+                onConflict: 'user_id'
+            })
+            .select()
+            .single();
+
+        if (error || !data) {
+            throw new Error(error?.message || 'Failed to update preferences');
+        }
+
+        // Transform response
+        return {
+            id: data.id,
+            userId: data.user_id,
+            colorTheme: data.color_theme,
+            modeTheme: data.mode_theme,
+            enableSystemDetection: data.enable_system_detection,
+            enableTransitions: data.enable_transitions,
+            syncAcrossDevices: data.sync_across_devices,
+            createdAt: data.created_at,
+            updatedAt: data.updated_at
+        };
+    }
+
+    async createUserPreferences(userId: string, preferences: Partial<ThemePreference>) {
+        const dbData = {
+            user_id: userId,
+            color_theme: preferences.colorTheme || 'sass3',
+            mode_theme: preferences.modeTheme || 'system',
+            enable_system_detection: preferences.enableSystemDetection ?? true,
+            enable_transitions: preferences.enableTransitions ?? true,
+            sync_across_devices: preferences.syncAcrossDevices ?? false
+        };
+
+        const { data, error } = await this.client
+            .from('user_preferences')
+            .insert(dbData)
+            .select()
+            .single();
+
+        if (error || !data) {
+            throw new Error(error?.message || 'Failed to create preferences');
+        }
+
+        // Transform response
+        return {
+            id: data.id,
+            userId: data.user_id,
+            colorTheme: data.color_theme,
+            modeTheme: data.mode_theme,
+            enableSystemDetection: data.enable_system_detection,
+            enableTransitions: data.enable_transitions,
+            syncAcrossDevices: data.sync_across_devices,
+            createdAt: data.created_at,
+            updatedAt: data.updated_at
+        };
     }
 
 
