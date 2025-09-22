@@ -67,6 +67,42 @@ export type Database = {
         }
         Relationships: []
       }
+      user_preferences: {
+        Row: {
+          id: string
+          user_id: string
+          color_theme: string
+          mode_theme: string
+          enable_system_detection: boolean
+          enable_transitions: boolean
+          sync_across_devices: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          color_theme?: string
+          mode_theme?: string
+          enable_system_detection?: boolean
+          enable_transitions?: boolean
+          sync_across_devices?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          color_theme?: string
+          mode_theme?: string
+          enable_system_detection?: boolean
+          enable_transitions?: boolean
+          sync_across_devices?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
