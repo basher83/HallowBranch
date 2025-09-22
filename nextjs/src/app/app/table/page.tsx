@@ -156,7 +156,7 @@ export default function TaskManagementPage() {
             setLoading(false);
             setInitialLoading(false);
         }
-    }, [filter, user?.id, initialLoading]);
+    }, [filter, initialLoading]);
 
     useEffect(() => {
         if (user?.id) {
