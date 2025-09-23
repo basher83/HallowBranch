@@ -295,3 +295,4 @@ HallowBranch is a personal project I built to help families preserve their genea
 _Built with ❤️ for families who value privacy and collaboration_
 # Pre-commit hook setup complete
 # Test invalid commit
+# Release workflow setup complete
