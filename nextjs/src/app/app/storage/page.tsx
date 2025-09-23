@@ -31,14 +31,7 @@ export default function FileManagementPage() {
             setLoading(true);
             setError('');
 
-            const userId = user?.id;
-            if (!userId) {
-                setError('Not authenticated');
-                setLoading(false);
-                return;
-            }
-
-            const supabase = await createSPASassClient();
+            const { supabase, userId } = await getAuthedClient();
             const { data, error } = await supabase.getFiles(userId);
 
             if (error) throw error;
@@ -49,7 +42,7 @@ export default function FileManagementPage() {
         } finally {
             setLoading(false);
         }
-    }, [user]);
+    }, [getAuthedClient]);
 
     useEffect(() => {
         if (user?.id) {
@@ -66,6 +59,16 @@ export default function FileManagementPage() {
         };
     }, []);
 
+    // Centralized helper for authenticated operations
+    const getAuthedClient = useCallback(async () => {
+        const userId = user?.id;
+        if (!userId) {
+            throw new Error('Not authenticated');
+        }
+        const supabase = await createSPASassClient();
+        return { supabase, userId };
+    }, [user]);
+
     const handleFileUpload = useCallback(async (file: File) => {
         try {
             setUploading(true);
@@ -80,14 +83,7 @@ export default function FileManagementPage() {
                 return;
             }
 
-            const userId = user?.id;
-            if (!userId) {
-                setError('Not authenticated');
-                setUploading(false);
-                return;
-            }
-
-            const supabase = await createSPASassClient();
+            const { supabase, userId } = await getAuthedClient();
             const { error } = await supabase.uploadFile(userId, file.name, file);
 
             if (error) throw error;
@@ -100,7 +96,7 @@ export default function FileManagementPage() {
         } finally {
             setUploading(false);
         }
-    }, [user, loadFiles]);
+    }, [getAuthedClient, loadFiles]);
 
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -145,18 +141,18 @@ export default function FileManagementPage() {
         try {
             setError('');
 
-            const userId = user?.id;
-            if (!userId) {
-                setError('Not authenticated');
-                return;
-            }
-
-            const supabase = await createSPASassClient();
+            const { supabase, userId } = await getAuthedClient();
             const { data, error } = await supabase.shareFile(userId, filename, 60, true);
 
-            if (error) throw error;
+            if (error || !data?.signedUrl) {
+                throw error ?? new Error('No signed URL returned');
+            }
 
-            window.open(data.signedUrl, '_blank', 'noopener,noreferrer');
+            // Attempt to open in new tab, fallback to current tab if blocked
+            const opened = window.open(data.signedUrl, '_blank', 'noopener,noreferrer');
+            if (!opened) {
+                window.location.assign(data.signedUrl);
+            }
         } catch (err) {
             setError('Failed to download file');
             console.error('Error downloading file:', err);
@@ -167,13 +163,7 @@ export default function FileManagementPage() {
         try {
             setError('');
 
-            const userId = user?.id;
-            if (!userId) {
-                setError('Not authenticated');
-                return;
-            }
-
-            const supabase = await createSPASassClient();
+            const { supabase, userId } = await getAuthedClient();
             const { data, error } = await supabase.shareFile(userId, filename, 24 * 60 * 60);
 
             if (error) throw error;
@@ -192,15 +182,7 @@ export default function FileManagementPage() {
         try {
             setError('');
 
-            const userId = user?.id;
-            if (!userId) {
-                setError('Not authenticated');
-                setShowDeleteDialog(false);
-                setFileToDelete(null);
-                return;
-            }
-
-            const supabase = await createSPASassClient();
+            const { supabase, userId } = await getAuthedClient();
             const { error } = await supabase.deleteFile(userId, fileToDelete);
 
             if (error) throw error;
@@ -262,6 +244,8 @@ export default function FileManagementPage() {
 
                     <div className="flex items-center justify-center w-full">
                         <label
+                            aria-busy={uploading}
+                            aria-disabled={uploading}
                             className={`w-full flex flex-col items-center px-4 py-6 bg-secondary/50 dark:bg-secondary rounded-lg shadow-lg tracking-wide border-2 cursor-pointer transition-colors ${
                                 isDragging
                                     ? 'border-primary border-dashed bg-accent'
@@ -348,9 +332,16 @@ export default function FileManagementPage() {
                     </div>
 
                     {/* Share Dialog */}
-                    <Dialog open={Boolean(shareUrl)} onOpenChange={() => {
-                        setShareUrl('');
-                        setSelectedFile(null);
+                    <Dialog open={Boolean(shareUrl)} onOpenChange={(open) => {
+                        if (!open) {
+                            setShareUrl('');
+                            setSelectedFile(null);
+                            setShowCopiedMessage(false);
+                            if (timeoutRef.current) {
+                                clearTimeout(timeoutRef.current);
+                                timeoutRef.current = null;
+                            }
+                        }
                     }}>
                         <DialogContent>
                             <DialogHeader>
