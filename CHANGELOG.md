@@ -13,10 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### Dark Mode Visual Issues 🎨
 - **File Storage Page**
-  - Fixed white background in file upload area by using `bg-secondary` instead of `bg-card`
+  - Fixed white background in file upload area by using `bg-secondary` (provides better contrast than `bg-card`)
   - Fixed file list items showing white backgrounds in dark mode
   - Replaced hardcoded colors (`bg-white`, `text-gray-*`) with semantic tokens
-  - Updated file action buttons to use shadcn/ui Button components with proper theming
+  - Migrated file action buttons to shadcn/ui Button components for consistent theming
+  - Removed hardcoded button colors (blue/green/red) in favor of semantic variants
   - Added proper hover states that work in both light and dark modes
 
 - **Cookie Consent Banner**
@@ -29,8 +30,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Component Improvements**
   - Added Button and Input component imports to storage page
-  - Replaced custom styled buttons with shadcn/ui Button components
-  - Used `bg-secondary` for better visual hierarchy (cards now stand out from background)
+  - Replaced native HTML buttons with shadcn/ui Button components (variant="ghost" size="icon")
+  - Used `bg-secondary` instead of `bg-card` for better visual hierarchy and contrast
+  - Removed all hardcoded color classes in favor of semantic design tokens
   - Improved contrast ratios for better accessibility in both themes
 
 ### Technical Details

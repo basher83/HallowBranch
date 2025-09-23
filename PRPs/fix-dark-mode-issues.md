@@ -41,7 +41,7 @@ Fix dark mode rendering issues in:
 
 ### Success Criteria
 
-- [ ] File upload area uses semantic `bg-card` instead of hardcoded `bg-white`
+- [ ] File upload area uses semantic `bg-secondary` instead of hardcoded `bg-white` (provides better contrast than `bg-card`)
 - [ ] File list items properly themed with semantic tokens
 - [ ] Cookie banner adapts to dark mode using `bg-background` and proper text colors
 - [ ] All interactive elements maintain proper contrast ratios (WCAG AA compliance)
@@ -160,7 +160,7 @@ No new data models needed - this is a pure UI theming fix using existing TypeScr
 
 ```yaml
 Task 1: FIX nextjs/src/app/app/storage/page.tsx upload area
-  - LINE 198: Replace bg-white with bg-card
+  - LINE 198: Replace bg-white with bg-secondary
   - LINES 200-201: Replace border-primary-500 bg-primary-50 with border-primary bg-accent
   - LINES 200-201: Replace border-primary-600 hover:bg-primary-50 with border-input hover:bg-accent
   - ADD IMPORT: Import Button component from @/components/ui/button
@@ -169,7 +169,7 @@ Task 1: FIX nextjs/src/app/app/storage/page.tsx upload area
 
 Task 2: FIX nextjs/src/app/app/storage/page.tsx file list
   - LINE 232: Replace text-gray-500 with text-muted-foreground
-  - LINE 237: Replace bg-white with bg-card
+  - LINE 237: Replace bg-white with bg-secondary
   - LINE 240: Replace text-gray-400 with text-muted-foreground
   - LINES 244-267: Replace custom button elements with Button component
   - PATTERN: Use variant="ghost" size="icon" for action buttons
@@ -209,7 +209,7 @@ className={`w-full flex flex-col items-center px-4 py-6 bg-white rounded-lg shad
 }`}
 
 // AFTER:
-className={`w-full flex flex-col items-center px-4 py-6 bg-card rounded-lg shadow-lg tracking-wide border-2 cursor-pointer transition-colors ${
+className={`w-full flex flex-col items-center px-4 py-6 bg-secondary/50 dark:bg-secondary rounded-lg shadow-lg tracking-wide border-2 cursor-pointer transition-colors ${
     isDragging
         ? 'border-primary border-dashed bg-accent'
         : 'border-input hover:bg-accent'
@@ -261,7 +261,7 @@ IMPORTS_TO_ADD:
 CSS_VARIABLES_USED:
   from globals.css (lines 280-343):
     - bg-background: Main page background
-    - bg-card: Card/container backgrounds
+    - bg-secondary: Card/container backgrounds (better contrast than bg-card)
     - text-foreground: Primary text color
     - text-muted-foreground: Secondary text color
     - bg-accent: Hover states
