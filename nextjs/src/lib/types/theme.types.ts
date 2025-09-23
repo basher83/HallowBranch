@@ -1,6 +1,12 @@
 // Theme-related TypeScript type definitions
 
-export type ColorTheme = 'sass' | 'sass2' | 'sass3' | 'blue' | 'purple' | 'green';
+export type ColorTheme =
+  | 'sass'
+  | 'sass2'
+  | 'sass3'
+  | 'blue'
+  | 'purple'
+  | 'green';
 export type ModeTheme = 'light' | 'dark' | 'system';
 
 export interface ThemePreference {
@@ -37,7 +43,9 @@ export interface UserPreferencesRow {
 }
 
 // Transform database row to application model
-export function transformPreferencesFromDB(row: UserPreferencesRow): ThemePreference {
+export function transformPreferencesFromDB(
+  row: UserPreferencesRow
+): ThemePreference {
   return {
     id: row.id,
     userId: row.user_id,
@@ -47,7 +55,7 @@ export function transformPreferencesFromDB(row: UserPreferencesRow): ThemePrefer
     enableTransitions: row.enable_transitions,
     syncAcrossDevices: row.sync_across_devices,
     createdAt: row.created_at,
-    updatedAt: row.updated_at
+    updatedAt: row.updated_at,
   };
 }
 
@@ -76,6 +84,6 @@ export function getDefaultPreferences(userId: string): ThemePreference {
     enableTransitions: true,
     syncAcrossDevices: false,
     createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    updatedAt: new Date().toISOString(),
   };
 }

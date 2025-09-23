@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+
 import { createSSRSassClient } from '@/lib/supabase/server';
 import { getDefaultPreferences } from '@/lib/types/theme.types';
 
@@ -9,7 +10,10 @@ export async function GET() {
     const client = sassClient.getSupabaseClient();
 
     // Check authentication
-    const { data: { user }, error: authError } = await client.auth.getUser();
+    const {
+      data: { user },
+      error: authError,
+    } = await client.auth.getUser();
 
     if (authError || !user) {
       return NextResponse.json(
@@ -43,7 +47,10 @@ export async function PUT(request: NextRequest) {
     const client = sassClient.getSupabaseClient();
 
     // Check authentication
-    const { data: { user }, error: authError } = await client.auth.getUser();
+    const {
+      data: { user },
+      error: authError,
+    } = await client.auth.getUser();
 
     if (authError || !user) {
       return NextResponse.json(
@@ -64,7 +71,14 @@ export async function PUT(request: NextRequest) {
     }
 
     // Validate theme values if provided
-    const validColorThemes = ['sass', 'sass2', 'sass3', 'blue', 'purple', 'green'];
+    const validColorThemes = [
+      'sass',
+      'sass2',
+      'sass3',
+      'blue',
+      'purple',
+      'green',
+    ];
     const validModeThemes = ['light', 'dark', 'system'];
 
     if (body.colorTheme && !validColorThemes.includes(body.colorTheme)) {
@@ -75,8 +89,8 @@ export async function PUT(request: NextRequest) {
           details: {
             field: 'colorTheme',
             received: body.colorTheme,
-            expected: validColorThemes.join(' | ')
-          }
+            expected: validColorThemes.join(' | '),
+          },
         },
         { status: 400 }
       );
@@ -90,8 +104,8 @@ export async function PUT(request: NextRequest) {
           details: {
             field: 'modeTheme',
             received: body.modeTheme,
-            expected: validModeThemes.join(' | ')
-          }
+            expected: validModeThemes.join(' | '),
+          },
         },
         { status: 400 }
       );
@@ -103,7 +117,7 @@ export async function PUT(request: NextRequest) {
       modeTheme: body.modeTheme,
       enableSystemDetection: body.enableSystemDetection,
       enableTransitions: body.enableTransitions,
-      syncAcrossDevices: body.syncAcrossDevices
+      syncAcrossDevices: body.syncAcrossDevices,
     });
 
     return NextResponse.json(updatedPreferences);
@@ -123,7 +137,10 @@ export async function POST(request: NextRequest) {
     const client = sassClient.getSupabaseClient();
 
     // Check authentication
-    const { data: { user }, error: authError } = await client.auth.getUser();
+    const {
+      data: { user },
+      error: authError,
+    } = await client.auth.getUser();
 
     if (authError || !user) {
       return NextResponse.json(
@@ -139,7 +156,11 @@ export async function POST(request: NextRequest) {
     const existingPreferences = await sassClient.getUserPreferences(user.id);
     if (existingPreferences) {
       return NextResponse.json(
-        { error: 'ConflictError', message: 'Preferences already exist for this user. Use PUT to update.' },
+        {
+          error: 'ConflictError',
+          message:
+            'Preferences already exist for this user. Use PUT to update.',
+        },
         { status: 409 }
       );
     }
@@ -150,7 +171,7 @@ export async function POST(request: NextRequest) {
       modeTheme: body.modeTheme || 'system',
       enableSystemDetection: body.enableSystemDetection ?? true,
       enableTransitions: body.enableTransitions ?? true,
-      syncAcrossDevices: body.syncAcrossDevices ?? false
+      syncAcrossDevices: body.syncAcrossDevices ?? false,
     });
 
     return NextResponse.json(newPreferences, { status: 201 });

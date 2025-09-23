@@ -1,3 +1,11 @@
+## **0.1.0**&emsp;<sub><sup>2025-09-23 (ddca4ea7d3fe0934b7d82e4ef20731037086ed40...12260ac6e91dc4db3a5f1aff2b298d27e2ee7d30)</sup></sub>
+
+### Features
+
+- add automated release workflow with conventional commits (ddca4ea7d3fe0934b7d82e4ef20731037086ed40)
+
+<br>
+
 # Changelog
 
 All notable changes to the HallowBranch project will be documented in this file.

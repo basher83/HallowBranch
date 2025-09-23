@@ -1,6 +1,6 @@
-"use client"
+'use client';
 
-import { ThemeProvider } from "@/components/theme/theme-provider"
+import { ThemeProvider } from '@/components/theme/theme-provider';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -12,5 +12,5 @@ export function Providers({ children }: { children: React.ReactNode }) {
     >
       {children}
     </ThemeProvider>
-  )
+  );
 }
