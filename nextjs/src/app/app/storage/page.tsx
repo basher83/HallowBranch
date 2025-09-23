@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useGlobal } from '@/lib/context/GlobalContext';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -24,13 +24,22 @@ export default function FileManagementPage() {
     const [fileToDelete, setFileToDelete] = useState<string | null>(null);
     const [showCopiedMessage, setShowCopiedMessage] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
+    const timeoutRef = useRef<number | null>(null);
 
     const loadFiles = useCallback(async () => {
         try {
             setLoading(true);
             setError('');
+
+            const userId = user?.id;
+            if (!userId) {
+                setError('Not authenticated');
+                setLoading(false);
+                return;
+            }
+
             const supabase = await createSPASassClient();
-            const { data, error } = await supabase.getFiles(user!.id);
+            const { data, error } = await supabase.getFiles(userId);
 
             if (error) throw error;
             setFiles(data || []);
@@ -48,15 +57,38 @@ export default function FileManagementPage() {
         }
     }, [user, loadFiles]);
 
+    // Cleanup timeout on unmount to prevent memory leaks
+    useEffect(() => {
+        return () => {
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
+        };
+    }, []);
+
     const handleFileUpload = useCallback(async (file: File) => {
         try {
             setUploading(true);
             setError('');
 
-            console.log(user)
+            // Check file size limit (50MB)
+            const MAX_FILE_SIZE_MB = 50;
+            const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
+            if (file.size > MAX_FILE_SIZE_BYTES) {
+                setError(`File exceeds ${MAX_FILE_SIZE_MB}MB limit. Please choose a smaller file.`);
+                setUploading(false);
+                return;
+            }
+
+            const userId = user?.id;
+            if (!userId) {
+                setError('Not authenticated');
+                setUploading(false);
+                return;
+            }
 
             const supabase = await createSPASassClient();
-            const { error } = await supabase.uploadFile(user!.id!, file.name, file);
+            const { error } = await supabase.uploadFile(userId, file.name, file);
 
             if (error) throw error;
 
@@ -112,8 +144,15 @@ export default function FileManagementPage() {
     const handleDownload = async (filename: string) => {
         try {
             setError('');
+
+            const userId = user?.id;
+            if (!userId) {
+                setError('Not authenticated');
+                return;
+            }
+
             const supabase = await createSPASassClient();
-            const { data, error } = await supabase.shareFile(user!.id!, filename, 60, true);
+            const { data, error } = await supabase.shareFile(userId, filename, 60, true);
 
             if (error) throw error;
 
@@ -127,8 +166,15 @@ export default function FileManagementPage() {
     const handleShare = async (filename: string) => {
         try {
             setError('');
+
+            const userId = user?.id;
+            if (!userId) {
+                setError('Not authenticated');
+                return;
+            }
+
             const supabase = await createSPASassClient();
-            const { data, error } = await supabase.shareFile(user!.id!, filename, 24 * 60 * 60);
+            const { data, error } = await supabase.shareFile(userId, filename, 24 * 60 * 60);
 
             if (error) throw error;
 
@@ -145,8 +191,17 @@ export default function FileManagementPage() {
 
         try {
             setError('');
+
+            const userId = user?.id;
+            if (!userId) {
+                setError('Not authenticated');
+                setShowDeleteDialog(false);
+                setFileToDelete(null);
+                return;
+            }
+
             const supabase = await createSPASassClient();
-            const { error } = await supabase.deleteFile(user!.id!, fileToDelete);
+            const { error } = await supabase.deleteFile(userId, fileToDelete);
 
             if (error) throw error;
 
@@ -165,7 +220,17 @@ export default function FileManagementPage() {
         try {
             await navigator.clipboard.writeText(text);
             setShowCopiedMessage(true);
-            setTimeout(() => setShowCopiedMessage(false), 2000);
+
+            // Clear any existing timeout to prevent leaks
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
+
+            // Set new timeout with proper type casting for browser environment
+            timeoutRef.current = window.setTimeout(() => {
+                setShowCopiedMessage(false);
+                timeoutRef.current = null;
+            }, 2000);
         } catch (err) {
             console.error('Failed to copy:', err);
             setError('Failed to copy to clipboard');
@@ -243,30 +308,39 @@ export default function FileManagementPage() {
                                         <span className="font-medium">{file.name.split('/').pop()}</span>
                                     </div>
                                     <div className="flex items-center space-x-2">
-                                        <button
+                                        <Button
+                                            variant="ghost"
+                                            size="icon"
                                             onClick={() => handleDownload(file.name)}
-                                            className="p-2 text-blue-600 hover:bg-blue-50 rounded-full transition-colors"
+                                            className="h-8 w-8"
                                             title="Download"
+                                            aria-label="Download file"
                                         >
-                                            <Download className="h-5 w-5"/>
-                                        </button>
-                                        <button
+                                            <Download className="h-4 w-4"/>
+                                        </Button>
+                                        <Button
+                                            variant="ghost"
+                                            size="icon"
                                             onClick={() => handleShare(file.name)}
-                                            className="p-2 text-green-600 hover:bg-green-50 rounded-full transition-colors"
+                                            className="h-8 w-8"
                                             title="Share"
+                                            aria-label="Share file"
                                         >
-                                            <Share2 className="h-5 w-5"/>
-                                        </button>
-                                        <button
+                                            <Share2 className="h-4 w-4"/>
+                                        </Button>
+                                        <Button
+                                            variant="ghost"
+                                            size="icon"
                                             onClick={() => {
                                                 setFileToDelete(file.name);
                                                 setShowDeleteDialog(true);
                                             }}
-                                            className="p-2 text-red-600 hover:bg-red-50 rounded-full transition-colors"
+                                            className="h-8 w-8 hover:text-destructive"
                                             title="Delete"
+                                            aria-label="Delete file"
                                         >
-                                            <Trash2 className="h-5 w-5"/>
-                                        </button>
+                                            <Trash2 className="h-4 w-4"/>
+                                        </Button>
                                     </div>
                                 </div>
                             ))
@@ -321,7 +395,10 @@ export default function FileManagementPage() {
                             </AlertDialogHeader>
                             <AlertDialogFooter>
                                 <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                <AlertDialogAction onClick={handleDelete} className="bg-red-600 hover:bg-red-700">
+                                <AlertDialogAction
+                                    onClick={handleDelete}
+                                    className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                                >
                                     Delete
                                 </AlertDialogAction>
                             </AlertDialogFooter>
