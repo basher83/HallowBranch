@@ -26,8 +26,8 @@ const eslintConfig = [
       'react/jsx-key': ['error', { checkFragmentShorthand: true }],
       'react/jsx-no-useless-fragment': 'error',
 
-      // General code quality
-      'no-console': 'warn',
+      // General code quality - disabled for development/debugging
+      // 'no-console': 'warn',
       'prefer-const': 'error',
       'no-var': 'error',
       'object-shorthand': 'error',
