@@ -18,21 +18,18 @@
 ## 🔄 Changes
 
 ### Frontend (Next.js/React)
-
 - [ ] Components modified/added
 - [ ] Pages modified/added
 - [ ] Styles/themes updated
 - [ ] State management changes
 
 ### Backend (Supabase)
-
 - [ ] Database migrations
 - [ ] RLS policies updated
 - [ ] Edge functions modified
 - [ ] Storage rules changed
 
 ### Other
-
 - [ ] Documentation updates
 - [ ] Configuration changes
 - [ ] Dependencies added/updated
@@ -46,7 +43,6 @@
 3. <!-- Step 3 -->
 
 ### Test checklist
-
 - [ ] Tested in light mode
 - [ ] Tested in dark mode
 - [ ] Tested on mobile viewport
@@ -75,41 +71,35 @@
 ## ✅ Checklist
 
 ### Code Quality
-
 - [ ] Code follows project conventions (CLAUDE.md)
 - [ ] No hardcoded values (uses constants/env vars)
 - [ ] No console.log statements in production code
 - [ ] Semantic HTML and proper accessibility
 
 ### TypeScript & Linting
-
-- [ ] `yarn lint` passes with zero warnings
-- [ ] `yarn tsc --noEmit` passes with zero errors
+- [ ] `npm run lint` passes with zero warnings
+- [ ] `npx tsc --noEmit` passes with zero errors
 - [ ] No `any` types added (use `unknown` if needed)
 
 ### Styling & UI
-
 - [ ] Uses semantic design tokens (not hardcoded colors)
 - [ ] Dark mode support maintained
 - [ ] Responsive design maintained
 - [ ] Uses existing shadcn/ui components where applicable
 
 ### Performance
-
 - [ ] No unnecessary re-renders introduced
 - [ ] Images optimized (if applicable)
 - [ ] Bundle size impact considered
 - [ ] Loading states implemented for async operations
 
 ### Security
-
 - [ ] No sensitive data exposed in client code
 - [ ] RLS policies updated if database changes made
 - [ ] Environment variables properly used for secrets
 - [ ] Input validation implemented
 
 ### Documentation
-
 - [ ] README updated (if needed)
 - [ ] CHANGELOG.md updated
 - [ ] Code comments added for complex logic
@@ -132,11 +122,9 @@
 <!-- List new dependencies and justify their addition -->
 
 **New packages added:**
-
 - <!-- package-name: reason for adding -->
 
 **Packages updated:**
-
 - <!-- package-name: from version -> to version -->
 
 ## 📚 Additional Notes
