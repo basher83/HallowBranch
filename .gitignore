@@ -204,3 +204,4 @@ temp/
 .turbo
 
 .mcp.json
+.playwright-mcp/
