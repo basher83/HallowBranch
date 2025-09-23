@@ -58,6 +58,16 @@ export default function FileManagementPage() {
   const [isDragging, setIsDragging] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // Centralized helper for authenticated operations
+  const getAuthedClient = useCallback(async () => {
+    const userId = user?.id;
+    if (!userId) {
+      throw new Error('Not authenticated');
+    }
+    const supabase = await createSPASassClient();
+    return { supabase, userId };
+  }, [user]);
+
   const loadFiles = useCallback(async () => {
     try {
       setLoading(true);
@@ -90,16 +100,6 @@ export default function FileManagementPage() {
       }
     };
   }, []);
-
-  // Centralized helper for authenticated operations
-  const getAuthedClient = useCallback(async () => {
-    const userId = user?.id;
-    if (!userId) {
-      throw new Error('Not authenticated');
-    }
-    const supabase = await createSPASassClient();
-    return { supabase, userId };
-  }, [user]);
 
   const handleFileUpload = useCallback(
     async (file: File) => {
