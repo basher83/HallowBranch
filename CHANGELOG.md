@@ -7,6 +7,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2025-09-22 - Dark Mode Fixes
+
+### Fixed
+
+#### Dark Mode Visual Issues 🎨
+- **File Storage Page**
+  - Fixed white background in file upload area by using `bg-secondary` instead of `bg-card`
+  - Fixed file list items showing white backgrounds in dark mode
+  - Replaced hardcoded colors (`bg-white`, `text-gray-*`) with semantic tokens
+  - Updated file action buttons to use shadcn/ui Button components with proper theming
+  - Added proper hover states that work in both light and dark modes
+
+- **Cookie Consent Banner**
+  - Fixed cookie banner staying white in dark mode by using `bg-background`
+  - Updated all text colors to use semantic tokens (`text-foreground`, `text-muted-foreground`)
+  - Replaced hardcoded link colors with `text-primary hover:text-primary/80`
+  - Removed custom button color overrides to allow proper theme inheritance
+
+### Changed
+
+- **Component Improvements**
+  - Added Button and Input component imports to storage page
+  - Replaced custom styled buttons with shadcn/ui Button components
+  - Used `bg-secondary` for better visual hierarchy (cards now stand out from background)
+  - Improved contrast ratios for better accessibility in both themes
+
+### Technical Details
+
+- **Files Modified**
+  - `/nextjs/src/app/app/storage/page.tsx` - Complete dark mode fixes for file management
+  - `/nextjs/src/components/Cookies.tsx` - Full theme support for cookie banner
+
+### Notes
+
+- The issue with `bg-card` was that it used the same color as `bg-background` in both themes
+- Using `bg-secondary` provides better visual hierarchy with proper contrast
+- All components now properly adapt to theme changes without hardcoded colors
+
 ## [0.2.0] - 2025-09-22 - Dark Mode Implementation
 
 ### Added
