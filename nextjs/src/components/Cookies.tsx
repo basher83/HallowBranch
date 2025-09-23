@@ -41,15 +41,26 @@ const CookieConsent = () => {
         setIsVisible(false);
     };
 
+    const handleDismiss = () => {
+        // Just dismiss the banner without recording a choice
+        // Banner will reappear on next visit
+        setIsVisible(false);
+    };
+
     if (!isVisible) return null;
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 bg-background border-t border-border shadow-lg z-50 transform transition-transform duration-500 ease-in-out">
+        <div
+            role="dialog"
+            aria-label="Cookie consent"
+            aria-describedby="cookie-consent-description"
+            className="fixed bottom-0 left-0 right-0 bg-background border-t border-border shadow-lg z-50 transform transition-transform duration-500 ease-in-out motion-reduce:transition-none"
+        >
             <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div className="flex items-center gap-3 flex-shrink-0">
                         <Shield className="h-5 w-5 text-primary" />
-                        <div className="space-y-1">
+                        <div className="space-y-1" id="cookie-consent-description">
                             <p className="text-sm text-foreground">
                                 We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic.
                                 By clicking &quot;Accept&quot;, you consent to our use of cookies.
@@ -82,9 +93,9 @@ const CookieConsent = () => {
                             Accept
                         </Button>
                         <button
-                            onClick={handleDecline}
+                            onClick={handleDismiss}
                             className="p-1 hover:bg-accent rounded-full transition-colors"
-                            aria-label="Close"
+                            aria-label="Dismiss cookie banner"
                         >
                             <X className="h-4 w-4 text-muted-foreground" />
                         </button>
