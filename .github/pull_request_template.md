@@ -83,8 +83,8 @@
 
 ### TypeScript & Linting
 
-- [ ] `npm run lint` passes with zero warnings
-- [ ] `npx tsc --noEmit` passes with zero errors
+- [ ] `yarn lint` passes with zero warnings
+- [ ] `yarn tsc --noEmit` passes with zero errors
 - [ ] No `any` types added (use `unknown` if needed)
 
 ### Styling & UI
