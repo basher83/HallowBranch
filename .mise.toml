@@ -6,7 +6,7 @@ min_version = "2024.9.5"
 
 [tools]
 # Node.js version for the project
-nodejs = "18"
+nodejs = "22"
 yarn = "4.10.2"
 
 [vars]
@@ -28,75 +28,88 @@ NEXT_TELEMETRY_DISABLED = "1"
 description = "Start the development server"
 depends = ["install-deps"]
 dir = "nextjs"
-run = "npm run dev"
+run = "yarn dev"
 
 [tasks.build]
 description = "Build the application for production"
 depends = ["install-deps"]
 dir = "nextjs"
-run = "npm run build"
+run = "yarn build"
 
 [tasks.lint]
-description = "Run code linting"
+description = "Run code linting (check only)"
 dir = "nextjs"
-run = "npm run lint"
+run = "yarn lint"
+
+[tasks.lint-fix]
+description = "Run code linting and fix issues"
+dir = "nextjs"
+run = "yarn lint --fix"
+
+[tasks.format]
+description = "Format code with Prettier"
+dir = "nextjs"
+run = "yarn prettier --write ."
+
+[tasks.format-check]
+description = "Check code formatting with Prettier"
+dir = "nextjs"
+run = "yarn prettier --check ."
+
+[tasks.type-check]
+description = "Run TypeScript type checking"
+dir = "nextjs"
+run = "yarn type-check"
 
 [tasks.start]
 description = "Start the production server"
 depends = ["build"]
 dir = "nextjs"
-run = "npm run start"
+run = "yarn start"
 
 [tasks.install-deps]
 description = "Install dependencies"
 dir = "nextjs"
-run = "npm install"
-
-[tasks.setup]
-description = "Complete initial setup for new developers"
-run = """
-echo '🚀 Setting up HallowBranch development environment...'
-echo '📦 Installing dependencies...'
-cd nextjs && npm install
-echo '✅ Dependencies installed'
-echo '🗄️  Setting up Supabase...'
-npx supabase login
-npx supabase link
-npx supabase db reset
-echo '✅ Supabase setup complete'
-echo '🔧 Environment setup complete!'
-echo '🎯 Run \"mise run dev\" to start development'
-"""
+run = "yarn install"
 
 [tasks.supabase-start]
 description = "Start local Supabase services"
-run = "npx supabase start"
+run = "supabase start"
 
 [tasks.supabase-stop]
 description = "Stop local Supabase services"
-run = "npx supabase stop"
+run = "supabase stop"
 
 [tasks.supabase-reset]
 description = "Reset local database and apply migrations"
-run = "npx supabase db reset"
+run = "supabase db reset"
 
 [tasks.supabase-status]
 description = "Show Supabase project status"
-run = "npx supabase status"
+run = "supabase status"
 
 [tasks.types]
 description = "Generate TypeScript types from Supabase schema"
-run = "npx supabase gen types typescript --local > nextjs/src/lib/supabase/types.ts"
+run = "supabase gen types typescript --local > nextjs/src/lib/supabase/types.ts"
+
+[tasks.release]
+description = "Run full release workflow (version, changelog, tag)"
+run = "./scripts/release.sh"
+
+[tasks.release-version]
+description = "Check what the next version would be"
+dir = "nextjs"
+run = "npx git-conventional-commits version"
+
+[tasks.release-changelog]
+description = "Generate changelog for current version"
+dir = "nextjs"
+run = "npx git-conventional-commits changelog --file ../CHANGELOG.md"
 
 [tasks.clean]
 description = "Clean build artifacts and dependencies"
 dir = "nextjs"
-run = "rm -rf .next node_modules/.cache && npm install"
-
-[tasks.test]
-description = "Run tests (when implemented)"
-dir = "nextjs"
-run = "npm run test"
+run = "rm -rf .next node_modules/.cache && yarn install"
 
 # Project-specific aliases for convenience
 [alias]
@@ -104,11 +117,16 @@ dev = "task dev"
 build = "task build"
 start = "task start"
 lint = "task lint"
-setup = "task setup"
+lint-fix = "task lint-fix"
+format = "task format"
+format-check = "task format-check"
 supabase = "task supabase-start"
 supabase-stop = "task supabase-stop"
 types = "task types"
 clean = "task clean"
+release = "task release"
+version = "task release-version"
+changelog = "task release-changelog"
 
 # Environment-specific variables should go in .mise.local.toml:
 # [env]
