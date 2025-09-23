@@ -1,0 +1,72 @@
+# git-conventional-commits configuration
+# https://github.com/qoomon/git-conventional-commits
+
+# Version calculation rules
+version:
+  # Version format
+  format: "${major}.${minor}.${patch}"
+  
+  # What commits trigger version bumps
+  strategies:
+    # Breaking changes increment major version
+    - type: "major"
+      # Match conventional commits with ! or BREAKING CHANGE
+      pattern: '^.*!:.*$|^.*BREAKING CHANGE:.*$'
+    
+    # Feature commits increment minor version  
+    - type: "minor"
+      pattern: '^feat(\(.+\))?: .+$'
+    
+    # Everything else increments patch version
+    - type: "patch" 
+      pattern: '^(fix|refactor|perf|style|test|docs|build|ops|chore)(\(.+\))?: .+$'
+
+# Changelog generation settings
+changelog:
+  sections:
+    - title: "🚀 Features"
+      patterns:
+        - "^feat(\(.+\))?: .+$"
+    
+    - title: "🐛 Bug Fixes" 
+      patterns:
+        - "^fix(\(.+\))?: .+$"
+    
+    - title: "⚡ Performance Improvements"
+      patterns:
+        - "^perf(\(.+\))?: .+$"
+    
+    - title: "♻️ Code Refactoring"
+      patterns:
+        - "^refactor(\(.+\))?: .+$"
+    
+    - title: "📚 Documentation"
+      patterns:
+        - "^docs(\(.+\))?: .+$"
+    
+    - title: "🧪 Tests"
+      patterns:
+        - "^test(\(.+\))?: .+$"
+    
+    - title: "🏗️ Build System"
+      patterns:
+        - "^build(\(.+\))?: .+$"
+    
+    - title: "🔧 Chores"
+      patterns:
+        - "^chore(\(.+\))?: .+$"
+        
+    - title: "💄 Styles"
+      patterns:
+        - "^style(\(.+\))?: .+$"
+        
+    - title: "⚙️ Operations"
+      patterns:
+        - "^ops(\(.+\))?: .+$"
+
+  # Breaking changes section
+  breakingChanges:
+    title: "💥 BREAKING CHANGES"
+    patterns:
+      - "^.*!:.*$"
+      - "^.*BREAKING CHANGE:.*$"

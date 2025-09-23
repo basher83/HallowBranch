@@ -1,0 +1,15 @@
+.next/
+out/
+build/
+dist/
+node_modules/
+*.min.js
+*.min.css
+public/
+.next
+.vercel
+.env.local
+.env.production
+.env.development
+yarn.lock
+package-lock.json

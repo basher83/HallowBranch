@@ -1,3 +1,11 @@
+## **0.1.0**&emsp;<sub><sup>2025-09-23 (ddca4ea7d3fe0934b7d82e4ef20731037086ed40...12260ac6e91dc4db3a5f1aff2b298d27e2ee7d30)</sup></sub>
+
+### Features
+
+- add automated release workflow with conventional commits (ddca4ea7d3fe0934b7d82e4ef20731037086ed40)
+
+<br>
+
 # Changelog
 
 All notable changes to the HallowBranch project will be documented in this file.
@@ -6,6 +14,46 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.2.1] - 2025-09-22 - Dark Mode Fixes
+
+### Fixed
+
+#### Dark Mode Visual Issues 🎨
+- **File Storage Page**
+  - Fixed white background in file upload area by using `bg-secondary` (provides better contrast than `bg-card`)
+  - Fixed file list items showing white backgrounds in dark mode
+  - Replaced hardcoded colors (`bg-white`, `text-gray-*`) with semantic tokens
+  - Migrated file action buttons to shadcn/ui Button components for consistent theming
+  - Removed hardcoded button colors (blue/green/red) in favor of semantic variants
+  - Added proper hover states that work in both light and dark modes
+
+- **Cookie Consent Banner**
+  - Fixed cookie banner staying white in dark mode by using `bg-background`
+  - Updated all text colors to use semantic tokens (`text-foreground`, `text-muted-foreground`)
+  - Replaced hardcoded link colors with `text-primary hover:text-primary/80`
+  - Removed custom button color overrides to allow proper theme inheritance
+
+### Changed
+
+- **Component Improvements**
+  - Added Button and Input component imports to storage page
+  - Replaced native HTML buttons with shadcn/ui Button components (variant="ghost" size="icon")
+  - Used `bg-secondary` instead of `bg-card` for better visual hierarchy and contrast
+  - Removed all hardcoded color classes in favor of semantic design tokens
+  - Improved contrast ratios for better accessibility in both themes
+
+### Technical Details
+
+- **Files Modified**
+  - `/nextjs/src/app/app/storage/page.tsx` - Complete dark mode fixes for file management
+  - `/nextjs/src/components/Cookies.tsx` - Full theme support for cookie banner
+
+### Notes
+
+- The issue with `bg-card` was that it used the same color as `bg-background` in both themes
+- Using `bg-secondary` provides better visual hierarchy with proper contrast
+- All components now properly adapt to theme changes without hardcoded colors
 
 ## [0.2.0] - 2025-09-22 - Dark Mode Implementation
 

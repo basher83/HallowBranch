@@ -35,9 +35,9 @@ git clone <repository-url> hallowbranch
 cd hallowbranch
 
 # 2. Configure Supabase
-npx supabase login
-npx supabase link --project-ref YOUR_PROJECT_REF
-npx supabase db reset
+supabase login
+supabase link --project-ref YOUR_PROJECT_REF
+supabase db reset
 
 # 3. Setup environment
 cd nextjs
@@ -293,3 +293,6 @@ HallowBranch is a personal project I built to help families preserve their genea
 ---
 
 _Built with ❤️ for families who value privacy and collaboration_
+# Pre-commit hook setup complete
+# Test invalid commit
+# Release workflow setup complete
