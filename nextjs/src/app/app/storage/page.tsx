@@ -24,7 +24,7 @@ export default function FileManagementPage() {
     const [fileToDelete, setFileToDelete] = useState<string | null>(null);
     const [showCopiedMessage, setShowCopiedMessage] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
-    const timeoutRef = useRef<number | null>(null);
+    const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     const loadFiles = useCallback(async () => {
         try {
@@ -156,7 +156,7 @@ export default function FileManagementPage() {
 
             if (error) throw error;
 
-            window.open(data.signedUrl, '_blank');
+            window.open(data.signedUrl, '_blank', 'noopener,noreferrer');
         } catch (err) {
             setError('Failed to download file');
             console.error('Error downloading file:', err);
@@ -226,8 +226,8 @@ export default function FileManagementPage() {
                 clearTimeout(timeoutRef.current);
             }
 
-            // Set new timeout with proper type casting for browser environment
-            timeoutRef.current = window.setTimeout(() => {
+            // Set new timeout - portable across environments
+            timeoutRef.current = setTimeout(() => {
                 setShowCopiedMessage(false);
                 timeoutRef.current = null;
             }, 2000);
@@ -301,7 +301,7 @@ export default function FileManagementPage() {
                             files.map((file) => (
                                 <div
                                     key={file.name}
-                                    className="flex items-center justify-between p-4 bg-secondary/50 dark:bg-secondary rounded-lg border"
+                                    className="flex items-center justify-between p-4 bg-secondary/50 dark:bg-secondary rounded-lg border border-border"
                                 >
                                     <div className="flex items-center space-x-3">
                                         <FileIcon className="h-6 w-6 text-muted-foreground"/>
@@ -375,6 +375,8 @@ export default function FileManagementPage() {
                                     <Copy className="h-4 w-4"/>
                                     {showCopiedMessage && (
                                         <span
+                                            role="status"
+                                            aria-live="polite"
                                             className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-popover text-popover-foreground border border-border text-xs px-2 py-1 rounded">
                                             Copied!
                                         </span>
