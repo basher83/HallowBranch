@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import type { ReactElement } from 'react';
 import './globals.css';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -9,7 +10,7 @@ import CookieConsent from '@/components/Cookies';
 import { Providers } from './providers';
 
 export const metadata: Metadata = {
-  title: process.env.NEXT_PUBLIC_PRODUCTNAME || 'HallowBranch',
+  title: process.env.NEXT_PUBLIC_PRODUCTNAME ?? 'HallowBranch',
   description: 'Private family genealogy platform for preserving your heritage.',
 };
 
@@ -17,7 +18,7 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>): ReactElement {
   let theme = process.env.NEXT_PUBLIC_THEME;
   if (!theme) {
     theme = 'theme-sass3';

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, type ReactElement } from 'react';
 import { CheckCircle, Loader2, Plus, Trash2, AlertCircle } from 'lucide-react';
 
 import { useGlobal } from '@/lib/context/GlobalContext';
@@ -33,7 +33,7 @@ interface CreateTaskDialogProps {
   onTaskCreated: () => Promise<void>;
 }
 
-function CreateTaskDialog({ onTaskCreated }: CreateTaskDialogProps) {
+function CreateTaskDialog({ onTaskCreated }: CreateTaskDialogProps): ReactElement {
   const { user } = useGlobal();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -76,7 +76,7 @@ function CreateTaskDialog({ onTaskCreated }: CreateTaskDialogProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-primary-600 text-white hover:bg-primary-700">
+        <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
           <Plus className="h-4 w-4 mr-2" />
           Add Task
         </Button>
@@ -115,14 +115,14 @@ function CreateTaskDialog({ onTaskCreated }: CreateTaskDialogProps) {
                 type="checkbox"
                 checked={isUrgent}
                 onChange={(e) => setIsUrgent(e.target.checked)}
-                className="rounded border-gray-300 focus:ring-primary-500"
+                className="rounded border-input focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               />
               <span className="text-sm">Mark as urgent</span>
             </label>
             <Button
               type="submit"
               disabled={loading}
-              className="bg-primary-600 text-white hover:bg-primary-700"
+              className="bg-primary text-primary-foreground hover:bg-primary/90"
             >
               {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Create Task
@@ -134,7 +134,7 @@ function CreateTaskDialog({ onTaskCreated }: CreateTaskDialogProps) {
   );
 }
 
-export default function TaskManagementPage() {
+export default function TaskManagementPage(): ReactElement {
   const { user } = useGlobal();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -203,7 +203,7 @@ export default function TaskManagementPage() {
   if (initialLoading) {
     return (
       <div className="flex justify-center items-center min-h-[200px]">
-        <Loader2 className="h-8 w-8 animate-spin text-primary-600" />
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
       </div>
     );
   }
@@ -268,7 +268,7 @@ export default function TaskManagementPage() {
           <div className="space-y-3 relative">
             {loading && (
               <div className="absolute inset-0 bg-background/50 flex items-center justify-center backdrop-blur-sm">
-                <Loader2 className="h-8 w-8 animate-spin text-primary-600" />
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
               </div>
             )}
 
@@ -282,11 +282,7 @@ export default function TaskManagementPage() {
                   key={task.id}
                   className={`p-4 border rounded-lg transition-colors ${
                     task.done ? 'bg-muted' : 'bg-card'
-                  } ${
-                    task.urgent && !task.done
-                      ? 'border-red-200'
-                      : 'border-border'
-                  }`}
+                  } ${task.urgent && !task.done ? 'border-destructive/30' : 'border-border'}`}
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1 min-w-0">
@@ -306,7 +302,7 @@ export default function TaskManagementPage() {
                           {new Date(task.created_at).toLocaleDateString()}
                         </span>
                         {task.urgent && !task.done && (
-                          <span className="px-2 py-0.5 text-xs bg-red-50 text-red-600 rounded-full">
+                          <span className="px-2 py-0.5 text-xs bg-destructive/10 text-destructive rounded-full">
                             Urgent
                           </span>
                         )}

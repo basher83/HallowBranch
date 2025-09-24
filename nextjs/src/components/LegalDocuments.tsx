@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { type ReactElement } from 'react';
 import { FileText, RefreshCw, Shield } from 'lucide-react';
 import Link from 'next/link';
 
@@ -7,7 +7,7 @@ type LegalDocumentsParams = {
   minimalist: boolean;
 };
 
-export default function LegalDocuments({ minimalist }: LegalDocumentsParams) {
+export default function LegalDocuments({ minimalist }: LegalDocumentsParams): ReactElement {
   if (minimalist) {
     return (
       <>

@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import { notFound } from 'next/navigation';
 
 import LegalDocument from '@/components/LegalDocument';
@@ -21,14 +22,13 @@ type DocumentKey = keyof typeof legalDocuments;
 
 interface LegalPageProps {
   document: DocumentKey;
-  lng: string;
 }
 
 interface LegalPageParams {
   params: LegalPageProps;
 }
 
-export default function LegalPage({ params }: LegalPageParams) {
+export default function LegalPage({ params }: LegalPageParams): ReactElement {
   const { document } = params;
 
   if (!legalDocuments[document]) {
