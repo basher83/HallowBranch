@@ -4,69 +4,69 @@
 # Version calculation rules
 version:
   # Version format
-  format: "${major}.${minor}.${patch}"
+  format: '${major}.${minor}.${patch}'
   
   # What commits trigger version bumps
   strategies:
     # Breaking changes increment major version
-    - type: "major"
+    - type: 'major'
       # Match conventional commits with ! or BREAKING CHANGE
       pattern: '^.*!:.*$|^.*BREAKING CHANGE:.*$'
     
     # Feature commits increment minor version  
-    - type: "minor"
+    - type: 'minor'
       pattern: '^feat(\(.+\))?: .+$'
     
     # Everything else increments patch version
-    - type: "patch" 
+    - type: 'patch' 
       pattern: '^(fix|refactor|perf|style|test|docs|build|ops|chore)(\(.+\))?: .+$'
 
 # Changelog generation settings
 changelog:
   sections:
-    - title: "🚀 Features"
+    - title: '🚀 Features'
       patterns:
-        - "^feat(\(.+\))?: .+$"
+        - '^feat(\(.+\))?: .+$'
     
-    - title: "🐛 Bug Fixes" 
+    - title: '🐛 Bug Fixes' 
       patterns:
-        - "^fix(\(.+\))?: .+$"
+        - '^fix(\(.+\))?: .+$'
     
-    - title: "⚡ Performance Improvements"
+    - title: '⚡ Performance Improvements'
       patterns:
-        - "^perf(\(.+\))?: .+$"
+        - '^perf(\(.+\))?: .+$'
     
-    - title: "♻️ Code Refactoring"
+    - title: '♻️ Code Refactoring'
       patterns:
-        - "^refactor(\(.+\))?: .+$"
+        - '^refactor(\(.+\))?: .+$'
     
-    - title: "📚 Documentation"
+    - title: '📚 Documentation'
       patterns:
-        - "^docs(\(.+\))?: .+$"
+        - '^docs(\(.+\))?: .+$'
     
-    - title: "🧪 Tests"
+    - title: '🧪 Tests'
       patterns:
-        - "^test(\(.+\))?: .+$"
+        - '^test(\(.+\))?: .+$'
     
-    - title: "🏗️ Build System"
+    - title: '🏗️ Build System'
       patterns:
-        - "^build(\(.+\))?: .+$"
+        - '^build(\(.+\))?: .+$'
     
-    - title: "🔧 Chores"
+    - title: '🔧 Chores'
       patterns:
-        - "^chore(\(.+\))?: .+$"
+        - '^chore(\(.+\))?: .+$'
         
-    - title: "💄 Styles"
+    - title: '💄 Styles'
       patterns:
-        - "^style(\(.+\))?: .+$"
+        - '^style(\(.+\))?: .+$'
         
-    - title: "⚙️ Operations"
+    - title: '⚙️ Operations'
       patterns:
-        - "^ops(\(.+\))?: .+$"
+        - '^ops(\(.+\))?: .+$'
 
   # Breaking changes section
   breakingChanges:
-    title: "💥 BREAKING CHANGES"
+    title: '💥 BREAKING CHANGES'
     patterns:
-      - "^.*!:.*$"
-      - "^.*BREAKING CHANGE:.*$"
+      - '^.*!:.*$'
+      - '^.*BREAKING CHANGE:.*$'

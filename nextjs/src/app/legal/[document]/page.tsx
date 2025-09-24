@@ -1,6 +1,4 @@
-'use client';
-
-import React from 'react';
+import type { ReactElement } from 'react';
 import { notFound } from 'next/navigation';
 
 import LegalDocument from '@/components/LegalDocument';
@@ -20,25 +18,24 @@ const legalDocuments = {
   },
 } as const;
 
-type LegalDocument = keyof typeof legalDocuments;
+type DocumentKey = keyof typeof legalDocuments;
 
 interface LegalPageProps {
-  document: LegalDocument;
-  lng: string;
+  document: string;
 }
 
 interface LegalPageParams {
   params: Promise<LegalPageProps>;
 }
 
-export default function LegalPage({ params }: LegalPageParams) {
-  const { document } = React.use<LegalPageProps>(params);
+export default async function LegalPage({ params }: LegalPageParams): Promise<ReactElement> {
+  const { document } = await params;
 
-  if (!legalDocuments[document]) {
+  if (!(document in legalDocuments)) {
     notFound();
   }
 
-  const { title, path } = legalDocuments[document];
+  const { title, path } = legalDocuments[document as DocumentKey];
 
   return (
     <div className="container mx-auto px-4 py-8">

@@ -1,13 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, type ReactElement } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 import { createSPASassClient } from '@/lib/supabase/client';
 import SSOButtons from '@/components/SSOButtons';
 
-export default function RegisterPage() {
+export default function RegisterPage(): ReactElement {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -39,7 +39,7 @@ export default function RegisterPage() {
       if (error) throw error;
 
       router.push('/auth/verify-email');
-    } catch (err: Error | unknown) {
+    } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
       } else {

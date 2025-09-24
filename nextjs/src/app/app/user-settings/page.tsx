@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, type ReactElement } from 'react';
 import { Key, User, CheckCircle } from 'lucide-react';
 
 import {
@@ -14,7 +14,7 @@ import { useGlobal } from '@/lib/context/GlobalContext';
 import { createSPASassClientAuthenticated as createSPASassClient } from '@/lib/supabase/client';
 import { MFASetup } from '@/components/MFASetup';
 
-export default function UserSettingsPage() {
+export default function UserSettingsPage(): ReactElement {
   const { user } = useGlobal();
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -46,14 +46,9 @@ export default function UserSettingsPage() {
       setSuccess('Password updated successfully');
       setNewPassword('');
       setConfirmPassword('');
-    } catch (err: Error | unknown) {
-      if (err instanceof Error) {
-        console.error('Error updating password:', err);
-        setError(err.message);
-      } else {
-        console.error('Error updating password:', err);
-        setError('Failed to update password');
-      }
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : 'Failed to update password';
+      setError(msg);
     } finally {
       setLoading(false);
     }

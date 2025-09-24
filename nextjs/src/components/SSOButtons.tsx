@@ -1,5 +1,6 @@
 'use client';
 
+import type { ReactElement } from 'react';
 import Link from 'next/link';
 
 import { createSPAClient } from '@/lib/supabase/client';
@@ -90,7 +91,7 @@ function getEnabledProviders(): Provider[] {
     );
 }
 
-export default function SSOButtons({ onError }: SSOButtonsProps) {
+export default function SSOButtons({ onError }: SSOButtonsProps): ReactElement | null {
   const handleSSOLogin = async (provider: Provider) => {
     try {
       const supabase = createSPAClient();
@@ -102,7 +103,7 @@ export default function SSOButtons({ onError }: SSOButtonsProps) {
       });
 
       if (error) throw error;
-    } catch (err: Error | unknown) {
+    } catch (err: unknown) {
       if (err instanceof Error) {
         onError?.(err.message);
       } else {
