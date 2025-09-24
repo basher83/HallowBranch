@@ -6,7 +6,7 @@ export default function AuthLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const productName = process.env.NEXT_PUBLIC_PRODUCTNAME;
+  const productName = process.env.NEXT_PUBLIC_PRODUCTNAME ?? 'HallowBranch';
   const testimonials = [
     {
       quote:
@@ -33,17 +33,17 @@ export default function AuthLayout({
 
   return (
     <div className="flex min-h-screen">
-      <div className="w-full lg:w-1/2 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white relative">
+      <div className="w-full lg:w-1/2 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 bg-background relative">
         <Link
           href="/"
-          className="absolute left-8 top-8 flex items-center text-sm text-gray-600 hover:text-gray-900 transition-colors"
+          className="absolute left-8 top-8 flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Homepage
         </Link>
 
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <h2 className="text-center text-3xl font-bold tracking-tight text-gray-900">
+          <h2 className="text-center text-3xl font-bold tracking-tight text-foreground">
             {productName}
           </h2>
         </div>
@@ -57,9 +57,9 @@ export default function AuthLayout({
             <h3 className="text-white text-2xl font-bold mb-8">
               Trusted by developers worldwide
             </h3>
-            {testimonials.map((testimonial, index) => (
+            {testimonials.map((testimonial) => (
               <div
-                key={index}
+                key={testimonial.author}
                 className="relative bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 shadow-xl"
               >
                 <div className="flex items-start space-x-4">
