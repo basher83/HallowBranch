@@ -1,5 +1,5 @@
 'use client';
-import React, { type ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, FileText, ShieldAlert, RefreshCw } from 'lucide-react';
@@ -37,6 +37,7 @@ export default function LegalLayout({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="py-6">
           <button
+            type="button"
             onClick={() => (history.length > 1 ? router.back() : router.push('/'))}
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
           >
