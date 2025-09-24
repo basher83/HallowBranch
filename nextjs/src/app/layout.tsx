@@ -9,8 +9,8 @@ import CookieConsent from '@/components/Cookies';
 import { Providers } from './providers';
 
 export const metadata: Metadata = {
-  title: process.env.NEXT_PUBLIC_PRODUCTNAME,
-  description: 'The best way to build your SaaS product.',
+  title: process.env.NEXT_PUBLIC_PRODUCTNAME || 'HallowBranch',
+  description: 'Private family genealogy platform for preserving your heritage.',
 };
 
 export default function RootLayout({

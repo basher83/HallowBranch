@@ -40,7 +40,6 @@ export function MFAVerification({ onVerified }: MFAVerificationProps) {
 
       const totpFactors = data.totp || [];
       setFactors(totpFactors);
-      console.log('totpFactors:', totpFactors);
 
       // If there's only one factor, select it automatically
       if (totpFactors.length === 1) {
