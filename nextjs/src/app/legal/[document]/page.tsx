@@ -25,11 +25,11 @@ interface LegalPageProps {
 }
 
 interface LegalPageParams {
-  params: LegalPageProps;
+  params: Promise<LegalPageProps>;
 }
 
-export default function LegalPage({ params }: LegalPageParams): ReactElement {
-  const { document } = params;
+export default async function LegalPage({ params }: LegalPageParams): Promise<ReactElement> {
+  const { document } = await params;
 
   if (!(document in legalDocuments)) {
     notFound();
