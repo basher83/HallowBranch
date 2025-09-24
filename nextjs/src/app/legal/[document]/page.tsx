@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import { notFound } from 'next/navigation';
 
 import LegalDocument from '@/components/LegalDocument';
@@ -20,12 +21,11 @@ const legalDocuments = {
 type DocumentKey = keyof typeof legalDocuments;
 
 interface LegalPageProps {
-  document: DocumentKey;
-  lng: string;
+  document: string;
 }
 
 interface LegalPageParams {
-  params: LegalPageProps;
+  params: Promise<LegalPageProps>;
 }
 
 /**
@@ -34,19 +34,20 @@ interface LegalPageParams {
  * Validates the `document` route parameter against the internal `legalDocuments` map and
  * triggers a 404 (via `notFound()`) if the key is not recognized.
  *
+ * Note: In Next.js 15, dynamic route params are passed as a Promise and must be awaited.
+ *
  * @param params - Route params object containing:
  *   - `document`: the document key (e.g., "privacy", "terms", "refund")
- *   - `lng`: locale string (passed through but not used by this component)
  * @returns The page's JSX element rendering the requested legal document.
  */
-export default function LegalPage({ params }: LegalPageParams) {
-  const { document } = params;
+export default async function LegalPage({ params }: LegalPageParams): Promise<ReactElement> {
+  const { document } = await params;
 
-  if (!legalDocuments[document]) {
+  if (!(document in legalDocuments)) {
     notFound();
   }
 
-  const { title, path } = legalDocuments[document];
+  const { title, path } = legalDocuments[document as DocumentKey];
 
   return (
     <div className="container mx-auto px-4 py-8">

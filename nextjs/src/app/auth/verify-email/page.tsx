@@ -2,7 +2,7 @@
 
 import { CheckCircle } from 'lucide-react';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, type ReactElement } from 'react';
 
 import { createSPASassClient } from '@/lib/supabase/client';
 
@@ -19,7 +19,7 @@ import { createSPASassClient } from '@/lib/supabase/client';
  *
  * @returns The verification UI as a React element.
  */
-export default function VerifyEmailPage() {
+export default function VerifyEmailPage(): ReactElement {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');

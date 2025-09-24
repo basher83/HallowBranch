@@ -34,7 +34,7 @@ Alert.displayName = 'Alert';
 
 const AlertTitle = React.forwardRef<
   HTMLHeadingElement,
-  React.HTMLAttributes<HTMLHeadingElement>
+  React.ComponentPropsWithoutRef<'h5'>
 >(({ className, ...props }, ref) => (
   <h5
     ref={ref}
@@ -46,7 +46,7 @@ AlertTitle.displayName = 'AlertTitle';
 
 const AlertDescription = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
+  React.ComponentPropsWithoutRef<'div'>
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}

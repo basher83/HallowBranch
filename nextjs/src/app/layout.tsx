@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import type { ReactElement } from 'react';
 import './globals.css';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -9,29 +10,37 @@ import CookieConsent from '@/components/Cookies';
 import { Providers } from './providers';
 
 export const metadata: Metadata = {
-  title: process.env.NEXT_PUBLIC_PRODUCTNAME || 'HallowBranch',
+  title: process.env.NEXT_PUBLIC_PRODUCTNAME ?? 'HallowBranch',
   description: 'Private family genealogy platform for preserving your heritage.',
 };
 
 /**
- * Root application layout that wraps pages with global providers, theme, and analytics.
+ * Root layout component that wraps the entire application with essential providers and analytics.
  *
- * Reads NEXT_PUBLIC_THEME to set the <body> class (defaults to "theme-sass3" when unset)
- * and NEXT_PUBLIC_GOOGLE_TAG to conditionally render the GoogleAnalytics component.
- * Renders Providers around the page content and includes Vercel Analytics, Speed Insights,
- * and a CookieConsent component.
+ * This component serves as the foundational layout for the HallowBranch genealogy platform,
+ * providing:
+ * - Theme configuration from environment variables with fallback to 'theme-sass3'
+ * - Analytics integration (Vercel Analytics, Speed Insights, and Google Analytics)
+ * - Cookie consent management
+ * - Application-wide providers (theme, authentication, etc.)
+ * - Hydration warning suppression for theme consistency
  *
- * @returns The root HTML structure for the application.
+ * Environment Variables:
+ * - NEXT_PUBLIC_THEME: Custom theme name (defaults to 'theme-sass3')
+ * - NEXT_PUBLIC_GOOGLE_TAG: Google Analytics measurement ID (optional)
+ * - NEXT_PUBLIC_PRODUCTNAME: Application title (defaults to 'HallowBranch')
+ *
+ * @param props - The component props
+ * @param props.children - The child components/pages to render within the layout
+ * @returns The root HTML structure with theme, analytics, and provider setup
  */
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
-  let theme = process.env.NEXT_PUBLIC_THEME;
-  if (!theme) {
-    theme = 'theme-sass3';
-  }
+}>): ReactElement {
+  // Simplified theme selection with nullish coalescing operator
+  const theme = process.env.NEXT_PUBLIC_THEME ?? 'theme-sass3';
   const gaID = process.env.NEXT_PUBLIC_GOOGLE_TAG;
   return (
     <html lang="en" suppressHydrationWarning>

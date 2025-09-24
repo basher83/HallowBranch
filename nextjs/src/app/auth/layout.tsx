@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
@@ -13,7 +14,7 @@ export default function AuthLayout({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}): ReactElement {
   const productName = process.env.NEXT_PUBLIC_PRODUCTNAME ?? 'HallowBranch';
   const testimonials = [
     {
@@ -67,7 +68,7 @@ export default function AuthLayout({
             </h3>
             {testimonials.map((testimonial) => (
               <div
-                key={testimonial.author}
+                key={`${testimonial.author}-${testimonial.role}`}
                 className="relative bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 shadow-xl"
               >
                 <div className="flex items-start space-x-4">

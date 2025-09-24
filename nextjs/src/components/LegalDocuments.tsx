@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { type ReactElement } from 'react';
 import { FileText, RefreshCw, Shield } from 'lucide-react';
 import Link from 'next/link';
 
@@ -15,7 +15,7 @@ type LegalDocumentsParams = {
  *
  * @param minimalist - If true, renders the compact/minimal visual variant; otherwise renders the full, card-style variant.
  */
-export default function LegalDocuments({ minimalist }: LegalDocumentsParams) {
+export default function LegalDocuments({ minimalist }: LegalDocumentsParams): ReactElement {
   if (minimalist) {
     return (
       <>

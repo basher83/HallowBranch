@@ -1,5 +1,6 @@
 'use client';
 
+import type { ReactElement } from 'react';
 import Link from 'next/link';
 
 import { createSPAClient } from '@/lib/supabase/client';
@@ -100,7 +101,7 @@ function getEnabledProviders(): Provider[] {
  * @param onError - Optional callback invoked with an error message when OAuth sign-in fails.
  * @returns A React element containing the SSO buttons and related notices, or `null` when no providers are enabled.
  */
-export default function SSOButtons({ onError }: SSOButtonsProps) {
+export default function SSOButtons({ onError }: SSOButtonsProps): ReactElement | null {
   const handleSSOLogin = async (provider: Provider) => {
     try {
       const supabase = createSPAClient();
