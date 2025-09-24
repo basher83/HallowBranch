@@ -102,7 +102,7 @@ export default function SSOButtons({ onError }: SSOButtonsProps) {
       });
 
       if (error) throw error;
-    } catch (err: Error | unknown) {
+    } catch (err: unknown) {
       if (err instanceof Error) {
         onError?.(err.message);
       } else {

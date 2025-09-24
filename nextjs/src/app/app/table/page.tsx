@@ -176,7 +176,7 @@ export default function TaskManagementPage() {
   const handleRemoveTask = async (id: number): Promise<void> => {
     try {
       const supabase = await createSPASassClient();
-      const { error: supabaseError } = await supabase.removeTask(id.toString());
+      const { error: supabaseError } = await supabase.removeTask(id);
       if (supabaseError) throw supabaseError;
       await loadTasks();
     } catch (err) {
@@ -188,9 +188,7 @@ export default function TaskManagementPage() {
   const handleMarkAsDone = async (id: number): Promise<void> => {
     try {
       const supabase = await createSPASassClient();
-      const { error: supabaseError } = await supabase.updateAsDone(
-        id.toString()
-      );
+      const { error: supabaseError } = await supabase.updateAsDone(id);
       if (supabaseError) throw supabaseError;
       setShowConfetti(true);
       setTimeout(() => setShowConfetti(false), 2000);

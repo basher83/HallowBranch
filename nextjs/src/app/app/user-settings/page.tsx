@@ -46,7 +46,7 @@ export default function UserSettingsPage() {
       setSuccess('Password updated successfully');
       setNewPassword('');
       setConfirmPassword('');
-    } catch (err: Error | unknown) {
+    } catch (err) {
       if (err instanceof Error) {
         console.error('Error updating password:', err);
         setError(err.message);

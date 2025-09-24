@@ -28,7 +28,7 @@ export default function VerifyEmailPage() {
         return;
       }
       setSuccess(true);
-    } catch (err: Error | unknown) {
+    } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
       } else {
