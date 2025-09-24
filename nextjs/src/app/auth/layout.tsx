@@ -1,6 +1,14 @@
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
+/**
+ * Layout component for authentication pages that displays the main auth content on the left and a decorative testimonials panel on the right (hidden on small screens).
+ *
+ * Renders the product name (from NEXT_PUBLIC_PRODUCTNAME with a 'HallowBranch' fallback) as the page heading and places `children` into the left-side content area. The right-side panel shows a static list of testimonials with avatars and author metadata.
+ *
+ * @param children - Content to render inside the left-side authentication area (typically a sign-in/sign-up form).
+ * @returns The composed authentication layout as a JSX element.
+ */
 export default function AuthLayout({
   children,
 }: {

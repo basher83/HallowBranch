@@ -18,6 +18,16 @@ import { useGlobal } from '@/lib/context/GlobalContext';
 import { createSPASassClient } from '@/lib/supabase/client';
 import { ThemeToggle } from '@/components/theme/theme-toggle';
 
+/**
+ * Application layout component that provides a responsive sidebar, top bar, theme toggle, and user menu.
+ *
+ * Renders a left navigation drawer (collapsible on mobile), highlights the active route by comparing the current pathname with each navigation item's href, and exposes a sticky header with a theme toggle and user dropdown. The user dropdown shows account information, allows navigating to the user settings page for password changes, and signs the user out via the Supabase SPA client (logout errors are caught and logged).
+ *
+ * The component derives a simple two-letter avatar from the authenticated user's email (splitting on `@`, `.`, `_`, or `-`) and gracefully falls back to placeholders while user data is loading.
+ *
+ * @param children - The page content to render within the layout.
+ * @returns The layout's JSX element containing navigation, header, and children.
+ */
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [isUserDropdownOpen, setUserDropdownOpen] = useState(false);

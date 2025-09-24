@@ -6,6 +6,19 @@ import { useState } from 'react';
 
 import { createSPASassClient } from '@/lib/supabase/client';
 
+/**
+ * Client React component that shows a "Check your email" UI and lets the user resend a verification email.
+ *
+ * Renders an input for the user's email, displays error/success states, and a button to trigger resending.
+ * The resend action validates that an email is provided, creates a SPA Supabase client via `createSPASassClient`,
+ * calls `supabase.resendVerificationEmail(email)`, and updates local `loading`, `error`, and `success` state based on the outcome.
+ *
+ * Side effects:
+ * - Calls `createSPASassClient()` and `supabase.resendVerificationEmail(email)`.
+ * - Updates component state (`loading`, `error`, `success`) to reflect the request status.
+ *
+ * @returns The verification UI as a React element.
+ */
 export default function VerifyEmailPage() {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);

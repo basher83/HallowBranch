@@ -13,6 +13,16 @@ export const metadata: Metadata = {
   description: 'Private family genealogy platform for preserving your heritage.',
 };
 
+/**
+ * Root application layout that wraps pages with global providers, theme, and analytics.
+ *
+ * Reads NEXT_PUBLIC_THEME to set the <body> class (defaults to "theme-sass3" when unset)
+ * and NEXT_PUBLIC_GOOGLE_TAG to conditionally render the GoogleAnalytics component.
+ * Renders Providers around the page content and includes Vercel Analytics, Speed Insights,
+ * and a CookieConsent component.
+ *
+ * @returns The root HTML structure for the application.
+ */
 export default function RootLayout({
   children,
 }: Readonly<{

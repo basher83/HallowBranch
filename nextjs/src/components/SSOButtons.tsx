@@ -90,6 +90,16 @@ function getEnabledProviders(): Provider[] {
     );
 }
 
+/**
+ * Renders SSO provider buttons for enabled providers and handles OAuth sign-in.
+ *
+ * Attempts to sign in with the selected provider using the app's Supabase client.
+ * On OAuth failure it invokes `onError` with a human-readable message. If no
+ * providers are enabled, the component returns `null` (renders nothing).
+ *
+ * @param onError - Optional callback invoked with an error message when OAuth sign-in fails.
+ * @returns A React element containing the SSO buttons and related notices, or `null` when no providers are enabled.
+ */
 export default function SSOButtons({ onError }: SSOButtonsProps) {
   const handleSSOLogin = async (provider: Provider) => {
     try {

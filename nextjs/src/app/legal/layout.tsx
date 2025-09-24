@@ -25,6 +25,16 @@ const legalDocuments = [
   },
 ];
 
+/**
+ * Layout wrapper for legal-document pages.
+ *
+ * Renders a two-column layout with a sidebar of legal document links and a main content area.
+ * The sidebar lists predefined documents (each linking to `/legal/{id}`), and the top includes a
+ * "Back" button that navigates to the previous page via `router.back()`.
+ *
+ * @param children - Content to render in the main (right-hand) area of the layout.
+ * @returns A React element containing the legal layout and provided children.
+ */
 export default function LegalLayout({
   children,
 }: {

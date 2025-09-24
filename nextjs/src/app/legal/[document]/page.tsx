@@ -28,6 +28,17 @@ interface LegalPageParams {
   params: LegalPageProps;
 }
 
+/**
+ * Page component that renders a legal document (privacy, terms, refund) based on route params.
+ *
+ * Validates the `document` route parameter against the internal `legalDocuments` map and
+ * triggers a 404 (via `notFound()`) if the key is not recognized.
+ *
+ * @param params - Route params object containing:
+ *   - `document`: the document key (e.g., "privacy", "terms", "refund")
+ *   - `lng`: locale string (passed through but not used by this component)
+ * @returns The page's JSX element rendering the requested legal document.
+ */
 export default function LegalPage({ params }: LegalPageParams) {
   const { document } = params;
 

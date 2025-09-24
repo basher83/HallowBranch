@@ -7,6 +7,14 @@ type LegalDocumentsParams = {
   minimalist: boolean;
 };
 
+/**
+ * Renders a "Legal Documents" section with links to Privacy, Terms, and Refund pages.
+ *
+ * When `minimalist` is true, a compact header and simple centered link buttons are rendered.
+ * When `minimalist` is false, a larger header and card-styled link tiles with icons are shown.
+ *
+ * @param minimalist - If true, renders the compact/minimal visual variant; otherwise renders the full, card-style variant.
+ */
 export default function LegalDocuments({ minimalist }: LegalDocumentsParams) {
   if (minimalist) {
     return (

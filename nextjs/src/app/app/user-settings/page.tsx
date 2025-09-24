@@ -14,6 +14,17 @@ import { useGlobal } from '@/lib/context/GlobalContext';
 import { createSPASassClientAuthenticated as createSPASassClient } from '@/lib/supabase/client';
 import { MFASetup } from '@/components/MFASetup';
 
+/**
+ * Renders the User Settings page allowing the current user to view account details,
+ * change their password, and manage multi-factor authentication.
+ *
+ * The component reads the current user from global context, provides a controlled
+ * form to update the password (validates matching inputs), calls the authenticated
+ * Supabase client to perform the update, and displays success or error alerts.
+ * It also renders the MFASetup component and updates the success message when MFA status changes.
+ *
+ * @returns The User Settings page as JSX.
+ */
 export default function UserSettingsPage() {
   const { user } = useGlobal();
   const [newPassword, setNewPassword] = useState('');

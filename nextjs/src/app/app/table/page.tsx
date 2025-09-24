@@ -134,6 +134,24 @@ function CreateTaskDialog({ onTaskCreated }: CreateTaskDialogProps) {
   );
 }
 
+/**
+ * Task management page component — displays, filters, creates, completes, and deletes the user's tasks.
+ *
+ * Renders a task list for the currently signed-in user, with controls to create new tasks, filter by
+ * status (all / active / completed), mark tasks as done, and remove tasks. Loads tasks from the
+ * Supabase-backed API on mount and whenever the filter changes. Shows an initial full-page loader
+ * while first loading, a translucent loading overlay for subsequent fetches, and a brief confetti
+ * animation when a task is marked done. Error messages from failed backend operations are surfaced
+ * in a destructive alert.
+ *
+ * Side effects:
+ * - Fetches tasks from the backend (using createSPASassClient().getMyTodoList).
+ * - Calls backend mutations to remove tasks and mark tasks done (removeTask, updateAsDone) and
+ *   refreshes the list after successful mutations.
+ * - Manages local UI state for loading, errors, filtering, and confetti.
+ *
+ * Note: This component relies on the global user from useGlobal() and does not accept props.
+ */
 export default function TaskManagementPage() {
   const { user } = useGlobal();
   const [tasks, setTasks] = useState<Task[]>([]);

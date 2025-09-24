@@ -17,6 +17,16 @@ interface MFAVerificationProps {
   onVerified: () => void;
 }
 
+/**
+ * React component that handles multi-factor authentication (MFA) verification using available TOTP factors.
+ *
+ * Renders a UI to load and select an authentication device (auto-selects when only one exists), accept a 6-digit
+ * verification code, create and verify an MFA challenge via the Supabase client, and invoke `onVerified` when verification succeeds.
+ * Displays loading and error states and prevents submission until a factor is selected and a 6-digit code is entered.
+ *
+ * @param onVerified - Callback invoked after a successful MFA verification.
+ * @returns A JSX element containing the MFA verification UI.
+ */
 export function MFAVerification({ onVerified }: MFAVerificationProps) {
   const [verifyCode, setVerifyCode] = useState('');
   const [error, setError] = useState('');

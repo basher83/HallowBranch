@@ -7,6 +7,20 @@ import Link from 'next/link';
 import { createSPASassClient } from '@/lib/supabase/client';
 import SSOButtons from '@/components/SSOButtons';
 
+/**
+ * Registration page component that renders a sign-up form and SSO buttons.
+ *
+ * Validates terms acceptance and password confirmation, shows inline error messages,
+ * and displays a loading state while creating the account. On successful registration
+ * the user is redirected to `/auth/verify-email`.
+ *
+ * Side effects:
+ * - Calls `createSPASassClient().registerEmail(email, password)` to create the account.
+ * - Navigates with Next.js router to `/auth/verify-email` on success.
+ * - Passes `setError` to the `SSOButtons` component to surface SSO errors.
+ *
+ * @returns The registration form UI as a React element.
+ */
 export default function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
