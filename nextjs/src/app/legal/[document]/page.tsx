@@ -21,7 +21,7 @@ const legalDocuments = {
 type DocumentKey = keyof typeof legalDocuments;
 
 interface LegalPageProps {
-  document: DocumentKey;
+  document: string;
 }
 
 interface LegalPageParams {
@@ -31,11 +31,11 @@ interface LegalPageParams {
 export default function LegalPage({ params }: LegalPageParams): ReactElement {
   const { document } = params;
 
-  if (!legalDocuments[document]) {
+  if (!(document in legalDocuments)) {
     notFound();
   }
 
-  const { title, path } = legalDocuments[document];
+  const { title, path } = legalDocuments[document as DocumentKey];
 
   return (
     <div className="container mx-auto px-4 py-8">
